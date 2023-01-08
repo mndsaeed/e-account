@@ -22,25 +22,25 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
-      signup,
+      // signup,
 
-      children: [
-        {
-          path: "/",
-          name: "signUp",
-          component: signup,
-        },
-        {
-          path: "/Home/signin",
-          name: "signin",
-          component: signin,
-        },
-        {
-          path: "/Home/signedin",
-          name: "signedin",
-          component: signedin,
-        },
-      ],
+      // children: [
+      //   {
+      //     path: "/",
+      //     name: "signUp",
+      //     component: signup,
+      //   },
+      //   {
+      //     path: "/Home/signin",
+      //     name: "signin",
+      //     component: signin,
+      //   },
+      //   {
+      //     path: "/Home/signedin",
+      //     name: "signedin",
+      //     component: signedin,
+      //   },
+      // ],
     },
     {
       path: "/otp",
