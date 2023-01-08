@@ -79,7 +79,7 @@ import baseLayout from "../layouts/baseLayout.vue";
             />
           </div>
           <div class="flex flex-col justify-start mb-2">
-            <router-link to="/home/signin">
+            <router-link to="signIn">
               <a
                 href="#"
                 class="mr-auto text-sm text-right text-blue-500 underline dark:text-blue-500"

@@ -14,7 +14,7 @@ import signin from "../components/SignIn.vue";
 import signup from "../components/Signup.vue";
 import TheBg from "../components/TheBg.vue";
 import signedin from "../views/signedin.vue";
-
+import signinView from "../views/SignInView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -41,6 +41,11 @@ const router = createRouter({
       //     component: signedin,
       //   },
       // ],
+    },
+    {
+      path: "/signIn",
+      name: "signIn",
+      component: signinView,
     },
     {
       path: "/otp",
