@@ -44,7 +44,6 @@ const submitForm = async () => {
 
 <template>
   <baseLayout>
-    <div class="flex lg:items-center lg:justify-center lg:mr-10 sm:m-0 lg:h-screen columns-2">
       <div
         class="w-full max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
       >
@@ -141,7 +140,7 @@ const submitForm = async () => {
             </span>
           </div>
           <div class="flex flex-col justify-start mb-2">
-            <router-link to="/home/signin">
+            <router-link to="signIn">
               <a
                 href="#"
                 class="mr-auto text-sm text-right text-blue-500 underline dark:text-blue-500"
@@ -152,12 +151,12 @@ const submitForm = async () => {
   
           <button
             @click.prevent="submitForm"
-            class="w-full mt-2 text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-full mt-2 text-white bg-primary border border-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Sign Up
           </button>
         </form>
       </div>
-    </div>
+    <!-- </div> -->
   </baseLayout>
 </template>

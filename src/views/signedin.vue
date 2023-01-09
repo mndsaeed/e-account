@@ -1,5 +1,9 @@
+<script setup>
+import baseLayout from '../layouts/baseLayout.vue'
+</script>
 <template>
-  <div class="flex items-center justify-center mr-10 h-screen columns-2">
+<baseLayout>
+  <!-- <div class="flex items-center justify-center mr-10 h-screen columns-2"> -->
     <div
       class="w-full h-[20rem] max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
     >
@@ -19,19 +23,20 @@
           />
         </svg>
       </div>
-      <div class="flex justify-center items-center mt-5 text-xl text-white">
+      <div class="flex justify-center items-center text-center mt-5 text-xl text-white">
         Your Application is still being processed
       </div>
       <div class="flex flex-col justify-center items-center mt-10">
-        <router-link to="/home/signin">
+        <router-link to="signin">
           <button
             type=""
-            class="w-32 text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-32 text-white bg-primary hover:bg-blue-800 focus:ring-4 border border-white focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Sign out
           </button>
         </router-link>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
+</baseLayout>
 </template>
