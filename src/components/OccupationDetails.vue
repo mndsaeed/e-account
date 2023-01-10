@@ -4,11 +4,13 @@ import DropBsector from "./DropDownBsector.vue";
 import DropIncome from "./DropDownIncome.vue";
 import DropSalary from "./DropDownSrange.vue";
 import BaseButton from "./BaseButton.vue";
+import TheStepper from "./TheStepper.vue";
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <div class="my-5 mb-10">
+  <div class="flex flex-col  px-5 w-full pb-5">
+    <TheStepper :step="3" />
+    <!-- <div class="my-5 mb-10">
       <ol
         class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
       >
@@ -102,7 +104,8 @@ import BaseButton from "./BaseButton.vue";
           <span class="hidden sm:inline-flex sm:ml-2">Submit</span>
         </li>
       </ol>
-    </div>
+    </div> -->
+
     <div class="flex flex-col">
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="flex flex-row relative w-full group">
@@ -167,10 +170,11 @@ import BaseButton from "./BaseButton.vue";
         </div>
       </div>
     </div>
-  </div>
+    
   <div class="flex justify-end items-end mt-[5.5rem]">
     <router-link to="/form/Cbos-form">
       <BaseButton buttonName="Next" class="w-32" />
     </router-link>
+  </div>
   </div>
 </template>

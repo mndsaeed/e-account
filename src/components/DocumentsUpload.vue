@@ -1,9 +1,11 @@
 <script setup>
 import BaseButton from "./BaseButton.vue";
+import TheStepper from "./TheStepper.vue";
 </script>
 
 <template>
-  <div class="my-5 mb-6">
+  <TheStepper :step="5" />
+  <!-- <div class="my-5 mb-6">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
     >
@@ -116,7 +118,7 @@ import BaseButton from "./BaseButton.vue";
         <span class="hidden sm:inline-flex sm:ml-2">Submit</span>
       </li>
     </ol>
-  </div>
+  </div> -->
   <div class="grid grid-rows-3 gap-2">
     <div class="flex items-center justify-center w-full">
       <label

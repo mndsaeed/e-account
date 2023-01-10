@@ -4,6 +4,7 @@ import DropBsector from "./DropDownBsector.vue";
 import DropIncome from "./DropDownIncome.vue";
 import DropSalary from "./DropDownSrange.vue";
 import BaseButton from "./BaseButton.vue";
+import TheStepper from "./TheStepper.vue";
 
 import { ref } from "vue";
 import {
@@ -25,7 +26,7 @@ function openModal() {
 </script>
 
 <template>
-  <div class="my-5 mb-10">
+  <!-- <div class="my-5 mb-10">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
     >
@@ -128,7 +129,11 @@ function openModal() {
         <span class="hidden sm:inline-flex sm:ml-2">Submit</span>
       </li>
     </ol>
-  </div>
+  </div> -->
+  <div class="flex flex-col px-5 w-full pb-5 ">
+  <div class="flex flex-col px-5 w-full pb-5 ">
+    <TheStepper :step="4"/>
+
   <div class="flex flex-col">
     <div class="grid md:grid-cols-2 md:gap-20">
       <div class="flex flex-row relative z-0 w-full group">
@@ -137,7 +142,7 @@ function openModal() {
             placeholder="Mothers Name"
             type="text"
             id="base-input"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
       </div>
@@ -308,6 +313,8 @@ function openModal() {
       </div>
     </div>
   </div>
+</div>
+</div>
 
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-10">

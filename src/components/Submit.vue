@@ -1,5 +1,6 @@
 <script setup>
 import BaseButton from "./BaseButton.vue";
+import TheStepper from "./TheStepper.vue";
 
 import { ref } from "vue";
 import {
@@ -21,7 +22,9 @@ function openModal() {
 </script>
 
 <template>
-  <div class="my-5 mb-6">
+
+  <TheStepper :step="6" />
+  <!-- <div class="my-5 mb-6">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
     >
@@ -144,7 +147,7 @@ function openModal() {
         <span class="hidden sm:inline-flex sm:ml-2">Submit</span>
       </li>
     </ol>
-  </div>
+  </div> -->
   <div class="flex flex-col">
     <div class="mb-5">
       <h1 class="text-primary font-bold text-md">Personal Information</h1>

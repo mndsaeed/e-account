@@ -2,6 +2,7 @@
 import DropState from "./DropDownState.vue";
 import DropCity from "./DropDownCity.vue";
 import BaseButton from "./BaseButton.vue";
+import TheStepper from "./TheStepper.vue";
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import BaseButton from "./BaseButton.vue";
             >
             <div class="mx-1.5 my-[1px] text-xs text-white">1</div></span
           > -->
-  <div class="my-5 mb-10">
+  <!-- <div class="my-5 mb-10">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
     >
@@ -92,8 +93,9 @@ import BaseButton from "./BaseButton.vue";
         <span class="hidden sm:inline-flex sm:ml-2">Submit</span>
       </li>
     </ol>
-  </div>
-  <div class="flex flex-col">
+  </div> -->
+  <div class="flex flex-col px-5 w-full pb-5">
+  <TheStepper :step="2" />
     <div class="flex flex-col text-left space-y-2 mb-5">
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="z-10 relative mb-6 w-full group">
@@ -104,7 +106,7 @@ import BaseButton from "./BaseButton.vue";
         </div>
       </div>
       <div class="grid md:grid-cols-2 md:gap-20">
-        <div class="flex flex-row relative z-0 w-full group">
+        <div class="flex flex-row relative z-0 w-full group max-sm:mb-6">
           <div class="relative z-0 w-full">
             <input
               placeholder="Area"
@@ -170,10 +172,11 @@ import BaseButton from "./BaseButton.vue";
         </div>
       </div>
     </div>
-  </div>
+    
   <div class="flex justify-end items-end mt-[4.5rem]">
     <router-link to="/form/occupation-details">
       <BaseButton buttonName="Next" class="w-32" />
     </router-link>
+  </div>
   </div>
 </template>

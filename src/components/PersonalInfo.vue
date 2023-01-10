@@ -12,8 +12,8 @@ import TheStepper from "./TheStepper.vue";
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <TheStepper class="mb-10" />
+  <div class="flex flex-col px-5 w-full pb-5">
+    <TheStepper class="mb-10" :step="1" />
     <div class="flex flex-col text-left space-y-2 mb-5">
       <div class="grid md:grid-cols-4 md:gap-6">
         <div class="relative z-0 mb-6 w-full group">
@@ -181,10 +181,10 @@ import TheStepper from "./TheStepper.vue";
         </div>
       </div>
     </div>
-  </div>
-  <div class="flex justify-end items-end mt-12">
-    <router-link to="/form/contact-info">
-      <BaseButton buttonName="Next" class="w-32" />
-    </router-link>
+    <div class="flex justify-end items-end mt-12">
+      <router-link to="/form/contact-info">
+        <BaseButton buttonName="Next" class="w-32" />
+      </router-link>
+    </div>
   </div>
 </template>
