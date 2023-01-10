@@ -65,7 +65,6 @@ const validate = async () => {
 </script>
 
 <template>
-
   <TheStepper :step="6" />
   <!-- <div class="my-5 mb-6">
     <ol
@@ -193,7 +192,9 @@ const validate = async () => {
   </div> -->
   <div class="flex flex-col">
     <div class="mb-5">
-      <h1 class="text-primary font-bold text-md">Personal Information</h1>
+      <router-link to="/Form/Personal-info">
+        <a class="text-primary font-bold text-md"> Personal Information </a>
+      </router-link>
       <div>
         <span class="font-semibold text-sm">Lorem ipsum: </span>
         <span class="text-xs"
@@ -224,7 +225,9 @@ const validate = async () => {
       </div>
     </div>
     <div class="mb-5">
-      <h1 class="text-primary font-bold text-md">Contact Information</h1>
+      <router-link to="/form/contact-info">
+        <a class="text-primary font-bold text-md">Contact Information</a>
+      </router-link>
       <div>
         <span class="font-semibold text-sm">Lorem ipsum: </span>
         <span class="text-xs"
@@ -255,7 +258,9 @@ const validate = async () => {
       </div>
     </div>
     <div class="mb-5">
-      <h1 class="text-primary font-bold text-md">Occupation Details</h1>
+      <router-link to="/form/occupation-details">
+        <a class="text-primary font-bold text-md">Occupation Details</a>
+      </router-link>
       <div>
         <span class="font-semibold text-sm">Lorem ipsum: </span>
         <span class="text-xs"
@@ -286,7 +291,9 @@ const validate = async () => {
       </div>
     </div>
     <div class="mb-3">
-      <h1 class="text-primary font-bold text-md">CBOS Form</h1>
+      <router-link to="/form/cbos-form">
+        <a class="text-primary font-bold text-md">CBOS Form</a>
+      </router-link>
       <div>
         <span class="font-semibold text-sm">Lorem ipsum: </span>
         <span class="text-xs"
@@ -340,12 +347,37 @@ const validate = async () => {
           {{ error.$message }}
         </span>
       </div>
-      <div class="flex flex-col items-end justify-end">
-        <!-- <router-link to="/form/success"> -->
-        <BaseButton @click="validate" buttonName="Submit" class="w-32" />
-        <!-- </router-link> -->
+    </div>
+    <div class="flex flex-row justify-between gap-5 h-fit mt-10">
+      <div class="flex justify-start items-end">
+        <router-link to="/form/upload">
+          <BaseButton
+            buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800"
+          />
+        </router-link>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex justify-end items-end">
+          <router-link to="/signin">
+            <BaseButton
+              buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700"
+            />
+          </router-link>
+        </div>
+        <div class="flex justify-end items-end">
+          <!-- <router-link to="/form/success"> -->
+          <BaseButton @click="validate" buttonName="Submit" class="w-32" />
+          <!-- </router-link> -->
+        </div>
       </div>
     </div>
+    <!-- <div class="flex flex-col items-end justify-end"> -->
+    <!-- <router-link to="/form/success"> -->
+    <!-- <BaseButton @click="validate" buttonName="Submit" class="w-32" /> -->
+    <!-- </router-link> -->
+    <!-- </div> -->
   </div>
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-10">

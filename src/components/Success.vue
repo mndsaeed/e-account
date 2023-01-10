@@ -4,7 +4,7 @@ import TheStepper from "./TheStepper.vue";
 </script>
 
 <template>
-  <TheStepper :step="7"/>
+  <TheStepper :step="7" />
   <!-- <div class="my-5 mb-6">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
@@ -162,7 +162,7 @@ import TheStepper from "./TheStepper.vue";
     Please allow 3-5 working days for feedback
   </div>
   <div class="flex flex-col items-end mt-[12rem]">
-    <router-link to="/signin">
+    <router-link to="/signIn">
       <BaseButton buttonName="Sign Out" class="w-32" />
     </router-link>
   </div>

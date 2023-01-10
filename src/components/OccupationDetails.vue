@@ -14,6 +14,7 @@ import {
   minLength,
   sameAs,
   helpers,
+  maxLength,
 } from "@vuelidate/validators";
 import { reactive, computed, ref } from "vue";
 const router = useRouter();
@@ -34,7 +35,11 @@ const rules = computed(() => {
     employersName: { required },
     department: { required },
     area: { required },
-    phoneNumber: { required },
+    phoneNumber: {
+      required,
+      minLength: minLength(10),
+      maxLength: maxLength(10),
+    },
     bType: { required },
     bSector: { required },
     iwr: { required },
@@ -55,7 +60,7 @@ const validate = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col  px-5 w-full pb-5">
+  <div class="flex flex-col px-5 w-full pb-5">
     <TheStepper :step="3" />
     <!-- <div class="my-5 mb-10">
       <ol
@@ -216,8 +221,11 @@ const validate = async () => {
             <input
               v-model="formData.phoneNumber"
               placeholder="Phone Number"
-              type="text"
+              type="tel"
               id="base-input"
+              maxlength="10"
+              minlength="10"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <span
@@ -277,12 +285,37 @@ const validate = async () => {
         </div>
       </div>
     </div>
-    
-  <div class="flex justify-end items-end mt-[5.5rem]">
-    <!-- <router-link to="/form/Cbos-form"> -->
-    <BaseButton @click="validate" buttonName="Next" class="w-32" />
-    <!-- </router-link> -->
-  </div>
-  </div>
+    <div class="flex flex-row justify-between gap-5">
+      <div class="flex justify-start items-end mt-[4.5rem]">
+        <router-link to="/form/contact-info">
+          <BaseButton
+            buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800"
+          />
+        </router-link>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex justify-end items-end">
+          <router-link to="/signin">
+            <BaseButton
+              buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700"
+            />
+          </router-link>
+        </div>
+        <div class="flex justify-end items-end mt-[4.5rem]">
+          <!-- <router-link to="/form/occupation-details"> -->
+          <!-- <BaseButton buttonName="Next" class="w-32" /> -->
+          <BaseButton @click="validate" buttonName="Next" class="w-32" />
+          <!-- </router-link> -->
+        </div>
+      </div>
+    </div>
 
+    <!-- <div class="flex justify-end items-end mt-[5.5rem]"> -->
+    <!-- <router-link to="/form/Cbos-form"> -->
+    <!-- <BaseButton @click="validate" buttonName="Next" class="w-32" /> -->
+    <!-- </router-link> -->
+    <!-- </div> -->
+  </div>
 </template>

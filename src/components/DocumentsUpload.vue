@@ -220,10 +220,35 @@ import TheStepper from "./TheStepper.vue";
       </label>
     </div>
   </div>
-  <div class="flex flex-col p-[1.9rem]"></div>
-  <div class="flex flex-col items-end justify-end">
-    <router-link to="/form/submit">
-      <BaseButton buttonName="Next" class="w-32" />
-    </router-link>
+  <div class="flex flex-row justify-between gap-5 h-fit mt-10">
+    <div class="flex justify-start items-end">
+      <router-link to="/form/cbos-form">
+        <BaseButton
+          buttonName="Previous"
+          class="w-32 bg-indigo-900 hover:bg-indigo-800"
+        />
+      </router-link>
+    </div>
+    <div class="flex gap-5">
+      <div class="flex justify-end items-end">
+        <router-link to="/signin">
+          <BaseButton
+            buttonName="Save and Quit"
+            class="w-32 bg-red-600 hover:bg-red-700"
+          />
+        </router-link>
+      </div>
+      <div class="flex justify-end items-end">
+        <router-link to="/form/submit">
+          <BaseButton @click="validate" buttonName="Next" class="w-32" />
+        </router-link>
+      </div>
+    </div>
   </div>
+
+  <!-- <div class="flex flex-col items-end justify-end"> -->
+  <!-- <router-link to="/form/submit"> -->
+  <!-- <BaseButton buttonName="Next" class="w-32" /> -->
+  <!-- </router-link> -->
+  <!-- </div> -->
 </template>

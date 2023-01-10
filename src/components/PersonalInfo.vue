@@ -338,9 +338,20 @@ const checkForm = async () => {
       </form>
     </div>
   </div>
-  <div class="flex justify-end items-end mt-16">
-    <!-- <router-link to="/form/contact-info"> -->
-    <BaseButton @click="checkForm" buttonName="Next" class="w-32" />
-    <!-- </router-link> -->
+  <div class="flex flex-row justify-end gap-5">
+    <div class="flex justify-end items-end">
+      <router-link to="/signin">
+        <BaseButton
+          @click="checkForm"
+          buttonName="Save and Quit"
+          class="w-32 bg-red-600 hover:bg-red-700"
+        />
+      </router-link>
+    </div>
+    <div class="flex justify-end items-end mt-16">
+      <!-- <router-link to="/form/contact-info"> -->
+      <BaseButton @click="checkForm" buttonName="Next" class="w-32" />
+      <!-- </router-link> -->
+    </div>
   </div>
 </template>

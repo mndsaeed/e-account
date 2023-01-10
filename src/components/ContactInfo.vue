@@ -9,6 +9,7 @@ import {
   required,
   email,
   minLength,
+  maxLength,
   sameAs,
   helpers,
 } from "@vuelidate/validators";
@@ -35,7 +36,11 @@ const rules = computed(() => {
     poBox: { required },
     houseNumber: { required },
     email: { required, email },
-    mobileNumber: { required },
+    mobileNumber: {
+      required,
+      minLength: minLength(10),
+      maxLength: maxLength(10),
+    },
   };
 });
 const v$ = useVuelidate(rules, formData);
@@ -141,7 +146,7 @@ const validate = async () => {
     </ol>
   </div> -->
   <div class="flex flex-col px-5 w-full pb-5">
-  <TheStepper :step="2" />
+    <TheStepper :step="2" />
     <div class="flex flex-col text-left space-y-2 mb-5">
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="z-10 relative mb-6 w-full group">
@@ -265,8 +270,11 @@ const validate = async () => {
             <input
               v-model="formData.mobileNumber"
               placeholder="Mobile Number"
-              type="text"
+              type="tel"
               id="base-input"
+              maxlength="10"
+              minlength="10"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <span
@@ -280,12 +288,31 @@ const validate = async () => {
         </div>
       </div>
     </div>
-    
-  <div class="flex justify-end items-end mt-[4.5rem]">
-    <!-- <router-link to="/form/occupation-details"> -->
-      <!-- <BaseButton buttonName="Next" class="w-32" /> -->
-      <BaseButton @click="validate" buttonName="Next" class="w-32" />
-    <!-- </router-link> -->
-  </div>
+    <div class="flex flex-row justify-between gap-5">
+      <div class="flex justify-start items-end mt-[4.5rem]">
+        <router-link to="/form/personal-info">
+          <BaseButton
+            buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800"
+          />
+        </router-link>
+      </div>
+      <div class="flex gap-5">
+        <div class="flex justify-end items-end">
+          <router-link to="/signin">
+            <BaseButton
+              buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700"
+            />
+          </router-link>
+        </div>
+        <div class="flex justify-end items-end mt-[4.5rem]">
+          <!-- <router-link to="/form/occupation-details"> -->
+          <!-- <BaseButton buttonName="Next" class="w-32" /> -->
+          <BaseButton @click="validate" buttonName="Next" class="w-32" />
+          <!-- </router-link> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>

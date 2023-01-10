@@ -10,7 +10,7 @@ import Step4 from "../components/CbosForm.vue";
 import Step5 from "../components/DocumentsUpload.vue";
 import Step6 from "../components/Submit.vue";
 import success from "../components/Success.vue";
-import signin from "../components/SignIn.vue";
+
 import signup from "../components/Signup.vue";
 import TheBg from "../components/TheBg.vue";
 import signedin from "../views/signedin.vue";

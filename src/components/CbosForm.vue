@@ -50,8 +50,8 @@ const formData = reactive({
 
 const rules = computed(() => {
   return {
-    mothersName: { required },
-    spouseName: { required },
+    mothersName: { required, minLength: minLength(3) },
+    spouseName: { required, minLength: minLength(3) },
     maritalStatus: { required },
     idType: { required },
     idNumber: { required },
@@ -179,272 +179,300 @@ const validate = async () => {
       </li>
     </ol>
   </div> -->
-  <div class="flex flex-col px-5 w-full pb-5 ">
-  <div class="flex flex-col px-5 w-full pb-5 ">
-    <TheStepper :step="4"/>
+  <div class="flex flex-col px-5 w-full pb-5">
+    <div class="flex flex-col px-5 w-full pb-5">
+      <TheStepper :step="4" />
 
-  <div class="flex flex-col">
-    <div class="grid md:grid-cols-2 md:gap-20">
-      <div class="flex flex-row relative z-0 w-full group">
-        <div class="relative z-0 mb-6 w-full">
-          <input
-            v-model="formData.mothersName"
-            placeholder="Mothers Name"
-            type="text"
-            id="base-input"
-            class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-          <span
-            class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-            v-for="error of v$.mothersName.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}
-          </span>
+      <div class="flex flex-col">
+        <div class="grid md:grid-cols-2 md:gap-20">
+          <div class="flex flex-row relative z-0 w-full group">
+            <div class="relative z-0 mb-6 w-full">
+              <input
+                v-model="formData.mothersName"
+                placeholder="Mothers Name"
+                type="text"
+                onkeydown="return /[a-zA-Z]/i.test(event.key)"
+                id="base-input"
+                class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              <span
+                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                v-for="error of v$.mothersName.$errors"
+                :key="error.$uid"
+              >
+                {{ error.$message }}
+              </span>
+            </div>
+          </div>
+          <div class="flex flex-row relative z-0 w-full group">
+            <div class="relative z-0 mb-6 w-full">
+              <input
+                v-model="formData.spouseName"
+                placeholder="Spouse Name"
+                onkeydown="return /[a-zA-Z]/i.test(event.key)"
+                type="text"
+                id="base-input"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              <span
+                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                v-for="error of v$.spouseName.$errors"
+                :key="error.$uid"
+              >
+                {{ error.$message }}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex flex-row relative z-0 w-full group">
-        <div class="relative z-0 mb-6 w-full">
-          <input
-            v-model="formData.spouseName"
-            placeholder="Spouse Name"
-            type="text"
-            id="base-input"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-          <span
-            class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-            v-for="error of v$.spouseName.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="relative z-0 w-full group">
-    <!-- <label class="text-sm" for="marititalStatus">Maritial Status</label> -->
-
-    <div class="flex flex-row relative z-0 mb-6 gap-5 group">
-      <!-- <label for="marititalStatus">Maritial Status</label> -->
-      <div
-        id="maritialStatus"
-        class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
-      >
-        <input
-          v-model="formData.maritalStatus"
-          :value="1"
-          id="maritial-1"
-          type="radio"
-          name="bordered-radio1"
-          class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label
-          for="maritial-1"
-          class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
-          >Single</label
-        >
-      </div>
-      <div
-        class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
-      >
-        <input
-          v-model="formData.maritalStatus"
-          :value="2"
-          id="maritial-2"
-          type="radio"
-          name="bordered-radio1"
-          class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label
-          for="maritial-2"
-          class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
-          >Married</label
-        >
-      </div>
-      <div
-        class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
-      >
-        <input
-          v-model="formData.maritalStatus"
-          :value="3"
-          id="maritial-3"
-          type="radio"
-          name="bordered-radio1"
-          class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label
-          for="maritial-3"
-          class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
-          >Other</label
-        >
-      </div>
-    </div>
-    <span
-      class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-      v-for="error of v$.maritalStatus.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}
-    </span>
-    <div class="grid md:grid-cols-2 md:gap-20">
       <div class="relative z-0 w-full group">
-        <div class="flex flex-row relative mb-6 z-0 w-full group">
+        <!-- <label class="text-sm" for="marititalStatus">Maritial Status</label> -->
+
+        <div class="flex flex-row relative z-0 mb-6 gap-5 group">
+          <!-- <label for="marititalStatus">Maritial Status</label> -->
           <div
-            class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+            id="maritialStatus"
+            class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
           >
             <input
-              v-model="formData.idType"
-              :value="true"
-              id="i-1"
+              v-model="formData.maritalStatus"
+              :value="1"
+              id="maritial-1"
               type="radio"
-              name="bordered-radio2"
+              name="bordered-radio1"
               class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
             />
             <label
-              for="i-1"
+              for="maritial-1"
               class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
-              >Passport</label
+              >Single</label
             >
           </div>
           <div
             class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
           >
             <input
-              v-model="formData.idType"
-              :value="false"
-              id="i-2"
+              v-model="formData.maritalStatus"
+              :value="2"
+              id="maritial-2"
               type="radio"
-              name="bordered-radio2"
+              name="bordered-radio1"
               class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
             />
             <label
-              for="i-2"
+              for="maritial-2"
               class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
-              >National Number</label
+              >Married</label
+            >
+          </div>
+          <div
+            class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+          >
+            <input
+              v-model="formData.maritalStatus"
+              :value="3"
+              id="maritial-3"
+              type="radio"
+              name="bordered-radio1"
+              class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              for="maritial-3"
+              class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
+              >Other</label
             >
           </div>
         </div>
         <span
           class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-          v-for="error of v$.idType.$errors"
+          v-for="error of v$.maritalStatus.$errors"
           :key="error.$uid"
         >
           {{ error.$message }}
         </span>
-      </div>
-      <div class="relative z-0 w-full">
-        <input
-          v-model="formData.idNumber"
-          placeholder="ID Number"
-          type="text"
-          id="base-input"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-        <span
-          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-          v-for="error of v$.idNumber.$errors"
-          :key="error.$uid"
-        >
-          {{ error.$message }}
-        </span>
-      </div>
-    </div>
-    <div class="grid md:grid-cols-2 md:gap-20">
-      <div class="relative z-0 w-full group">
-        <input
-          v-model="formData.dateOfIssue"
-          placeholder="Date of Issue"
-          type="text"
-          onfocus="(this.type='date')"
-          onblur="(this.type='text')"
-          id="base-input"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-        <span
-          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-          v-for="error of v$.dateOfIssue.$errors"
-          :key="error.$uid"
-        >
-          {{ error.$message }}
-        </span>
-      </div>
-      <div class="relative z-0 mb-6 w-full group">
-        <input
-          v-model="formData.dateOfExpiry"
-          placeholder="Date of Expiry"
-          type="text"
-          onfocus="(this.type='date')"
-          onblur="(this.type='text')"
-          id="base-input"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-        <span
-          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-          v-for="error of v$.dateOfExpiry.$errors"
-          :key="error.$uid"
-        >
-          {{ error.$message }}
-        </span>
-      </div>
-    </div>
-    <div class="grid md:grid-cols-2 md:gap-20">
-      <div class="relative z-0 w-full group">
-        <div class="relative z-0 w-full">
-          <input
-            v-model="formData.cbosId"
-            placeholder="CBOS ID"
-            type="text"
-            id="base-input"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-          <span
-            class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-            v-for="error of v$.cbosId.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}
-          </span>
+        <div class="grid md:grid-cols-2 md:gap-20">
+          <div class="relative z-0 w-full group">
+            <div class="flex flex-row relative mb-6 z-0 w-full group">
+              <div
+                class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+              >
+                <input
+                  v-model="formData.idType"
+                  :value="true"
+                  id="i-1"
+                  type="radio"
+                  name="bordered-radio2"
+                  class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="i-1"
+                  class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
+                  >Passport</label
+                >
+              </div>
+              <div
+                class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+              >
+                <input
+                  v-model="formData.idType"
+                  :value="false"
+                  id="i-2"
+                  type="radio"
+                  name="bordered-radio2"
+                  class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="i-2"
+                  class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300"
+                  >National Number</label
+                >
+              </div>
+            </div>
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.idType.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
+          <div class="relative z-0 w-full">
+            <input
+              v-model="formData.idNumber"
+              placeholder="ID Number"
+              type="text"
+              id="base-input"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.idNumber.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
         </div>
-      </div>
-    </div>
+        <div class="grid md:grid-cols-2 md:gap-20">
+          <div class="relative z-0 w-full group">
+            <input
+              v-model="formData.dateOfIssue"
+              placeholder="Date of Issue"
+              type="text"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
+              id="base-input"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.dateOfIssue.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
+          <div class="relative z-0 mb-6 w-full group">
+            <input
+              v-model="formData.dateOfExpiry"
+              placeholder="Date of Expiry"
+              type="text"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
+              id="base-input"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.dateOfExpiry.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-20">
+          <div class="relative z-0 w-full group">
+            <div class="relative z-0 w-full">
+              <input
+                v-model="formData.cbosId"
+                placeholder="CBOS ID"
+                type="text"
+                id="base-input"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              <span
+                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                v-for="error of v$.cbosId.$errors"
+                :key="error.$uid"
+              >
+                {{ error.$message }}
+              </span>
+            </div>
+          </div>
+        </div>
 
-    <div class="grid md:grid-cols-2 md:gap-20 mt-20">
-      <div class="flex items-center">
-        <input
-          v-model="formData.terms"
-          :value="true"
-          id="default-checkbox"
-          type="checkbox"
-          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-        />
+        <div class="grid md:grid-cols-2 md:gap-20 mt-5">
+          <div class="flex items-center">
+            <input
+              v-model="formData.terms"
+              :value="true"
+              id="default-checkbox"
+              type="checkbox"
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
 
-        <label
-          for="default-checkbox"
-          class="ml-2 text-sm font-medium dark:text-gray-300 text-blue-600 hover:underline underline"
-          ><a @click="openModal" href="#">
-            I've the Terms and Conditions.</a
-          ></label
-        >
-        <span
-          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-          v-for="error of v$.terms.$errors"
-          :key="error.$uid"
-        >
-          {{ error.$message }}
-        </span>
-      </div>
+            <label
+              for="default-checkbox"
+              class="ml-2 text-sm font-medium dark:text-gray-300 text-blue-600 hover:underline underline"
+              ><a @click="openModal" href="#">
+                I've the Terms and Conditions.</a
+              ></label
+            >
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.terms.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row justify-between gap-5 h-fit mt-10">
+          <div class="flex justify-start items-end">
+            <router-link to="/form/occupation-details">
+              <BaseButton
+                buttonName="Previous"
+                class="w-32 bg-indigo-900 hover:bg-indigo-800"
+              />
+            </router-link>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex justify-end items-end">
+              <router-link to="/signin">
+                <BaseButton
+                  buttonName="Save and Quit"
+                  class="w-32 bg-red-600 hover:bg-red-700"
+                />
+              </router-link>
+            </div>
+            <div class="flex justify-end items-end">
+              <!-- <router-link to="/form/occupation-details"> -->
+              <!-- <BaseButton buttonName="Next" class="w-32" /> -->
+              <BaseButton @click="validate" buttonName="Next" class="w-32" />
+              <!-- </router-link> -->
+            </div>
+          </div>
+        </div>
 
-      <div class="flex justify-end">
+        <!-- <div class="flex justify-end"> -->
         <!-- <router-link to="/form/upload"> -->
-        <BaseButton @click="validate" buttonName="Next" class="w-32" />
+        <!-- <BaseButton @click="validate" buttonName="Next" class="w-32" /> -->
         <!-- </router-link> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
-</div>
-</div>
 
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-10">
