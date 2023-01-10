@@ -11,6 +11,22 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 
+import useVuelidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  sameAs,
+  helpers,
+} from "@vuelidate/validators";
+import { reactive, computed } from "vue";
+
+// export default {
+//   components: { BaseCard, TheBg, BaseDropDown, DropDown, Basebutton },
+// };
+
+import { useRouter } from "vue-router";
+
 const isOpen = ref(false);
 
 function closeModal() {
@@ -19,6 +35,33 @@ function closeModal() {
 function openModal() {
   isOpen.value = true;
 }
+
+const router = useRouter();
+// const checkForm = async () => {
+//   console.log("submitted");
+//   await router.push("/form/contact-info");
+// };
+
+const formData = reactive({
+  terms: "",
+});
+
+const rules = computed(() => {
+  return {
+    terms: { required },
+  };
+});
+const v$ = useVuelidate(rules, formData);
+const validate = async () => {
+  const result = await v$.value.$validate();
+
+  if (result) {
+    router.push("/form/success");
+    // alert("valid");
+  } else {
+    // alert("invalid");
+  }
+};
 </script>
 
 <template>
@@ -276,6 +319,7 @@ function openModal() {
     <div class="grid md:grid-cols-2 md:gap-20 mt-2">
       <div class="flex items-center">
         <input
+          v-model="formData.terms"
           id="default-checkbox"
           type="checkbox"
           value=""
@@ -288,11 +332,18 @@ function openModal() {
             I've the Terms and Conditions.</a
           ></label
         >
+        <span
+          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+          v-for="error of v$.terms.$errors"
+          :key="error.$uid"
+        >
+          {{ error.$message }}
+        </span>
       </div>
       <div class="flex flex-col items-end justify-end">
-        <router-link to="/form/success">
-          <BaseButton buttonName="Submit" class="w-32" />
-        </router-link>
+        <!-- <router-link to="/form/success"> -->
+        <BaseButton @click="validate" buttonName="Submit" class="w-32" />
+        <!-- </router-link> -->
       </div>
     </div>
   </div>
