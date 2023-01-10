@@ -3,10 +3,6 @@ import BaseCard from "../components/BaseCard.vue";
 import TheBg from "../components/TheBg.vue";
 import DropDown from "../components/DropDown.vue";
 import Basebutton from "../components/BaseButton.vue";
-
-import { useRouter } from "vue-router";
-import { ref, reactive, computed } from "vue";
-const router = useRouter();
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -15,6 +11,10 @@ import {
   sameAs,
   helpers,
 } from "@vuelidate/validators";
+
+import { useRouter } from "vue-router";
+import { ref, reactive, computed } from "vue";
+const router = useRouter();
 
 const formData = reactive({
   accountType: "",
