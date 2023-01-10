@@ -1,8 +1,8 @@
 <script setup>
-import BaseCard from "../components/BaseCard.vue";
-import TheBg from "../components/TheBg.vue";
-import DropDown from "../components/DropDown.vue";
-import Basebutton from "../components/BaseButton.vue";
+import BaseCard from "@/components/BaseCard.vue";
+import TheBg from "@/components/TheBg.vue";
+import DropDown from "@/components/DropDown.vue";
+import Basebutton from "@/components/BaseButton.vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
