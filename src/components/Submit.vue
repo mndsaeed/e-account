@@ -1,6 +1,6 @@
 <script setup>
-import BaseButton from "./BaseButton.vue";
-import TheStepper from "./TheStepper.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import TheStepper from "@/components/TheStepper.vue";
 
 import { ref } from "vue";
 import {
