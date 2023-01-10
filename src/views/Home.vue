@@ -122,7 +122,7 @@ const submitForm = async () => {
               >Your password</label
             >
             <input
-              type="string"
+              type="password"
               v-model="formData.password"
               id="password"
               placeholder="••••••••"
@@ -143,7 +143,7 @@ const submitForm = async () => {
               >Repeat password</label
             >
             <input
-              type="string"
+              type="password"
               v-model="formData.confirmPassword"
               id="confirmPassword"
               placeholder="••••••••"

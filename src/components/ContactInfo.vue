@@ -2,6 +2,52 @@
 import DropState from "./DropDownState.vue";
 import DropCity from "./DropDownCity.vue";
 import BaseButton from "./BaseButton.vue";
+import { useRouter } from "vue-router";
+import useVuelidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  sameAs,
+  helpers,
+} from "@vuelidate/validators";
+import { reactive, computed, ref } from "vue";
+const router = useRouter();
+
+const formData = reactive({
+  state: "",
+  city: "",
+  area: "",
+  street: "",
+  pobox: "",
+  houseNumber: "",
+  email: "",
+  mobileNumber: "",
+});
+
+const rules = computed(() => {
+  return {
+    state: { required },
+    city: { required },
+    area: { required },
+    street: { required },
+    poBox: { required },
+    houseNumber: { required },
+    email: { required, email },
+    mobileNumber: { required },
+  };
+});
+const v$ = useVuelidate(rules, formData);
+const validate = async () => {
+  const result = await v$.value.$validate();
+
+  if (result) {
+    router.push("/form/occupation-details");
+    // alert("valid");
+  } else {
+    // alert("invalid");
+  }
+};
 </script>
 
 <template>
@@ -97,31 +143,61 @@ import BaseButton from "./BaseButton.vue";
     <div class="flex flex-col text-left space-y-2 mb-5">
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="z-10 relative mb-6 w-full group">
-          <DropState />
+          <DropState v-model="formData.state" />
+          <span
+            class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+            v-for="error of v$.state.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </span>
         </div>
         <div class="relative mb-6 w-full group">
-          <DropCity />
+          <DropCity v-model="formData.city" />
+          <span
+            class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+            v-for="error of v$.city.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </span>
         </div>
       </div>
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 w-full">
             <input
+              v-model="formData.area"
               placeholder="Area"
               type="text"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.area.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 mb-6 w-full">
             <input
+              v-model="formData.street"
               placeholder="Street"
               type="text"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.street.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
       </div>
@@ -129,21 +205,37 @@ import BaseButton from "./BaseButton.vue";
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 mb-6 w-full">
             <input
+              v-model="formData.poBox"
               placeholder="P.O BOX"
               type="text"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.poBox.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 mb-6 w-full">
             <input
+              v-model="formData.houseNumber"
               placeholder="House Number"
               type="text"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.houseNumber.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
       </div>
@@ -151,29 +243,45 @@ import BaseButton from "./BaseButton.vue";
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 mb-6 w-full">
             <input
+              v-model="formData.email"
               placeholder="E-mail Address"
               type="email"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.email.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
         <div class="flex flex-row relative z-0 w-full group">
           <div class="relative z-0 mb-6 w-full">
             <input
+              v-model="formData.mobileNumber"
               placeholder="Mobile Number"
               type="text"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.mobileNumber.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="flex justify-end items-end mt-[4.5rem]">
-    <router-link to="/form/occupation-details">
-      <BaseButton buttonName="Next" class="w-32" />
-    </router-link>
+    <!-- <router-link to="/form/occupation-details"> -->
+    <BaseButton @click="validate" buttonName="Next" class="w-32" />
+    <!-- </router-link> -->
   </div>
 </template>

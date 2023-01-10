@@ -160,7 +160,7 @@ import BaseButton from "./BaseButton.vue";
     Please allow 3-5 working days for feedback
   </div>
   <div class="flex flex-col items-end mt-[12rem]">
-    <router-link to="/home/signin">
+    <router-link to="/signin">
       <BaseButton buttonName="Sign Out" class="w-32" />
     </router-link>
   </div>
