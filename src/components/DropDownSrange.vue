@@ -6,7 +6,7 @@
       >
         <span class="flex items-center">
           <span class="block truncate text-sm text-gray-500">{{
-            selected ? selected : "Monthly Income"
+            selected ? selected : value || "Monthly Income"
           }}</span>
         </span>
         <span
@@ -86,4 +86,5 @@ const dropData = [
 ];
 
 const selected = ref(dropData[-1]);
+const props = defineProps(["value"]);
 </script>
