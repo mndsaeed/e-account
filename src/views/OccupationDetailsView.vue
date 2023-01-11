@@ -1,10 +1,10 @@
 <script setup>
-import DropBtype from "./DropDownBtype.vue";
-import DropBsector from "./DropDownBsector.vue";
-import DropIncome from "./DropDownIncome.vue";
-import DropSalary from "./DropDownSrange.vue";
-import BaseButton from "./BaseButton.vue";
-import TheStepper from "./TheStepper.vue";
+import DropBtype from "@/components/DropDownBtype.vue";
+import DropBsector from "@/components/DropDownBsector.vue";
+import DropIncome from "@/components/DropDownIncome.vue";
+import DropSalary from "@/components/DropDownSrange.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import TheStepper from "@/components/TheStepper.vue";
 
 import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";

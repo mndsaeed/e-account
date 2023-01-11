@@ -1,5 +1,5 @@
 <script setup>
-import baseLayout from "../layouts/baseLayout.vue";
+import baseLayout from "@/layouts/baseLayout.vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -60,9 +60,9 @@ const submitForm = async () => {
 
 <template>
   <baseLayout>
-    <div
-      class="w-full max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
-    >
+    <!-- <div
+      class="w-full max-w-lg p-4 max-sm:bg-primary backdrop-blur-xl max-sm:backdrop-blur-0 rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+    > -->
       <form class="space-y-6" action="">
         <h5
           class="inline-block text-xl font-medium text-gray-300 dark:text-white text-center"
@@ -168,15 +168,16 @@ const submitForm = async () => {
             </a>
           </router-link>
         </div>
-
+<div class="w-full flex">
         <button
           @click.prevent="submitForm"
           class="w-full mt-2 text-white bg-primary border border-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Sign Up
         </button>
+      </div>
       </form>
-    </div>
+    <!-- </div> -->
     <!-- </div> -->
   </baseLayout>
 </template>

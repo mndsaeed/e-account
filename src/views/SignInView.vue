@@ -1,5 +1,5 @@
 <script setup>
-import baseLayout from "../layouts/baseLayout.vue";
+import baseLayout from "@/layouts/baseLayout.vue";
 import { reactive, computed, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -10,9 +10,9 @@ const validate = async () => {
 <template>
   <baseLayout>
     <!-- <div class="flex items-center justify-center mr-10 h-screen columns-2"> -->
-    <div
+    <!-- <div
       class="w-full max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
-    >
+    > -->
       <form @submit.prevent="validate" class="space-y-6" action="#">
         <h5
           class="inline-block text-xl font-medium text-gray-300 dark:text-white text-center"
@@ -71,7 +71,7 @@ const validate = async () => {
         </button>
         <!-- </router-link> -->
       </form>
-    </div>
+    <!-- </div> -->
     <!-- </div> -->
   </baseLayout>
 </template>

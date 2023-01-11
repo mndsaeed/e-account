@@ -1,8 +1,8 @@
 <script setup>
-import DropState from "./DropDownState.vue";
-import DropCity from "./DropDownCity.vue";
-import BaseButton from "./BaseButton.vue";
-import TheStepper from "./TheStepper.vue";
+import DropState from "@/components/DropDownState.vue";
+import DropCity from "@/components/DropDownCity.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import TheStepper from "@/components/TheStepper.vue";
 import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import {

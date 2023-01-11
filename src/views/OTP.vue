@@ -1,6 +1,6 @@
 <script setup>
-import TheBg from "../components/TheBg.vue";
-import BaseCard from "../components/BaseCard.vue";
+import TheBg from "@/components/TheBg.vue";
+import BaseCard from "@/components/BaseCard.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -45,7 +45,7 @@ const next5 = () => {
   <!-- <div class="h-screen bg-primary">
     <div class="flex justify-center">
       <div class="flex items-center justify-center mt-10 object-cover">
-        <img class="mr-2" src="../assets/imgs/SFB-logo-2.png" alt="" />
+        <img class="mr-2" src="@/assets/imgs/SFB-logo-2.png" alt="" />
         <h1 class="ml-2 text-3xl text-white font-serif">
           Online Account Opening
         </h1>

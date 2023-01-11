@@ -1,27 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import otp from "../views/OTP.vue";
-import form from "../views/Form.vue";
-import accountType from "../views/AccountType.vue";
-import Step1 from "../components/PersonalInfo.vue";
-import Step2 from "../components/ContactInfo.vue";
-import Step3 from "../components/OccupationDetails.vue";
-import Step4 from "../components/CbosForm.vue";
-import Step5 from "../components/DocumentsUpload.vue";
-import Step6 from "../components/Submit.vue";
-import success from "../components/Success.vue";
+import SignUpView from "@/views/SignUpView.vue";
+import otp from "@/views/OTP.vue";
+import form from "@/layouts/Form.vue";
+import accountType from "@/views/AccountType.vue";
+import Step1 from "@/views/PersonalInfoView.vue";
+import Step2 from "@/views/ContactInfoView.vue";
+import Step3 from "@/views/OccupationDetailsView.vue";
+import Step4 from "@/views/CbosFormView.vue";
+import Step5 from "@/views/DocumentsUploadView.vue";
+import Step6 from "@/components/Submit.vue";
+import success from "@/views/SuccessView.vue";
 
-import signup from "../components/Signup.vue";
-import TheBg from "../components/TheBg.vue";
-import signedin from "../views/signedin.vue";
-import signinView from "../views/SignInView.vue";
+import signup from "@/components/Signup.vue";
+import TheBg from "@/components/TheBg.vue";
+import signedin from "@/views/signedin.vue";
+import signinView from "@/views/SignInView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
       name: "home",
-      component: Home,
+      component: SignUpView,
     },
     {
       path: "/signIn",

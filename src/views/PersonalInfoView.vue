@@ -1,10 +1,10 @@
 <script setup>
-import BaseCard from "./BaseCard.vue";
-import FormCard from "./FormCard.vue";
+import BaseCard from "@/components/BaseCard.vue";
+import FormCard from "@/components/FormCard.vue";
 
-import DropDownNation from "./DropDownNation.vue";
-import BaseButton from "./BaseButton.vue";
-import TheStepper from "./TheStepper.vue";
+import DropDownNation from "@/components/DropDownNation.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import TheStepper from "@/components/TheStepper.vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
