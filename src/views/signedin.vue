@@ -4,7 +4,7 @@ import baseLayout from '@/layouts/baseLayout.vue'
 <template>
   <baseLayout>
     <div
-      class="w-full h-[20rem] max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      class="w-full h-[20rem] max-w-lg p-4 backdrop-blur-xl rounded-sm  sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
       <div class="flex justify-center items-center mt-[4rem]">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
           class="w-12 h-12">
