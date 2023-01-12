@@ -8,7 +8,7 @@ import Step2 from "@/views/ContactInfoView.vue";
 import Step3 from "@/views/OccupationDetailsView.vue";
 import Step4 from "@/views/CbosFormView.vue";
 import Step5 from "@/views/DocumentsUploadView.vue";
-import Step6 from "@/components/Submit.vue";
+import Step6 from "@/views/Submit.vue";
 import success from "@/views/SuccessView.vue";
 
 import signup from "@/components/Signup.vue";
@@ -47,48 +47,49 @@ const router = createRouter({
       component: accountType,
     },
     {
-      path: "/Form/",
-      name: "form",
-      component: form,
-
-      children: [
-        {
-          path: "/Form/Personal-info",
-          name: "Step1",
-          component: Step1,
-        },
-        {
-          path: "/Form/Contact-info",
-          name: "Step2",
-          component: Step2,
-        },
-        {
-          path: "/Form/Occupation-details",
-          name: "Step3",
-          component: Step3,
-        },
-        {
-          path: "/Form/Cbos-form",
-          name: "Step4",
-          component: Step4,
-        },
-        {
-          path: "/Form/upload",
-          name: "Step5",
-          component: Step5,
-        },
-        {
-          path: "/Form/submit",
-          name: "Step6",
-          component: Step6,
-        },
-        {
-          path: "/Form/success",
-          name: "success",
-          component: success,
-        },
-      ],
+      path: "/Form/Personal-info",
+      name: "Step1",
+      component: Step1,
     },
+    {
+      path: "/Form/Contact-info",
+      name: "Step2",
+      component: Step2,
+    },
+    {
+      path: "/Form/Occupation-details",
+      name: "Step3",
+      component: Step3,
+    },
+    {
+      path: "/Form/Cbos-form",
+      name: "Step4",
+      component: Step4,
+    },
+    {
+      path: "/Form/upload",
+      name: "Step5",
+      component: Step5,
+    },
+    {
+      path: "/Form/success",
+      name: "success",
+      component: success,
+    },
+    {
+      path: "/Form/submit",
+      name: "Step6",
+      component: Step6,
+    },
+    // {
+    //   path: "/Form/",
+    //   name: "form",
+    //   component: form,
+
+    //   children: [
+        
+    //   ],
+    // },
   ],
 });
 
