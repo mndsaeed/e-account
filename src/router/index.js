@@ -81,15 +81,6 @@ const router = createRouter({
       name: "Step6",
       component: Step6,
     },
-    // {
-    //   path: "/Form/",
-    //   name: "form",
-    //   component: form,
-
-    //   children: [
-        
-    //   ],
-    // },
   ],
 });
 
