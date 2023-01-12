@@ -23,7 +23,7 @@ import {
   sameAs,
   helpers,
 } from "@vuelidate/validators";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, watch, onMounted } from "vue";
 
 const isOpen = ref(false);
 
@@ -46,6 +46,18 @@ const formData = reactive({
   dateOfExpiry: "",
   cbosId: "",
   terms: "",
+});
+
+watch(formData, (formData) => {
+  for (const property in formData) {
+    localStorage.setItem(property, JSON.stringify(formData[property]));
+  }
+});
+onMounted(() => {
+  for (const property in formData) {
+    formData[property] = JSON.parse(localStorage.getItem(property));
+    console.log(property);
+  }
 });
 
 const rules = computed(() => {

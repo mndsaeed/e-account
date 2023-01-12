@@ -5,7 +5,7 @@
         class="w-full cursor-default rounded-sm border border-gray-300 bg-gray-50 py-2 pl-3 pr-10 text-center shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
         <span class="flex items-center">
           <span class="block truncate text-sm text-gray-500">{{
-            selected? selected: "Business type"
+            selected ? selected : value || "Business type"
           }}</span>
         </span>
         <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -65,4 +65,5 @@ const dropData = [
 ];
 
 const selected = ref(dropData[-1]);
+const props = defineProps(["value"]);
 </script>

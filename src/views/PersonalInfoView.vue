@@ -14,7 +14,7 @@ import {
   sameAs,
   helpers,
 } from "@vuelidate/validators";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, onMounted, watch, toRefs, toRef } from "vue";
 
 // export default {
 //   components: { BaseCard, TheBg, BaseDropDown, DropDown, Basebutton },
@@ -26,23 +26,70 @@ const router = useRouter();
 //   console.log("submitted");
 //   await router.push("/form/contact-info");
 // };
+// var data = ref(localStorage.getItem("formData"));
 
 const formData = reactive({
-  fisrstName: "",
+  firstName: "",
   secondName: "",
   thirdName: "",
   fourthName: "",
   dob: "",
   gender: "",
   resident: "",
-  Id: "",
-  IdNo: "",
+  idType: "",
+  idNumber: "",
   nationality: "",
 });
 
+watch(formData, (formData) => {
+  for (const property in formData) {
+    localStorage.setItem(property, JSON.stringify(formData[property]));
+  }
+
+  // localStorage.setItem("formData", JSON.stringify(formData.value));
+  // localStorage.setItem("firstName", JSON.stringify(formData.firstName));
+  // localStorage.setItem("secondName", JSON.stringify(formData.secondName));
+  // localStorage.setItem("thirdName", JSON.stringify(formData.thirdName));
+  // localStorage.setItem("fourthName", JSON.stringify(formData.fourthName));
+  // localStorage.setItem("dob", JSON.stringify(formData.dob));
+  // localStorage.setItem("gender", JSON.stringify(formData.gender));
+  // localStorage.setItem("resident", JSON.stringify(formData.resident));
+  // localStorage.setItem("Id", JSON.stringify(formData.Id));
+  // localStorage.setItem("IdNo", JSON.stringify(formData.IdNo));
+  // localStorage.setItem("nationality", JSON.stringify(formData.nationality));
+});
+
+onMounted(() => {
+  for (const property in formData) {
+    formData[property] = JSON.parse(localStorage.getItem(property));
+    console.log(property);
+  }
+
+  // for (const key in localStorage) {
+  //   if (localStorage.hasOwnProperty(key)) {
+  //     formData[key] = JSON.parse(localStorage.getItem(key));
+  //     // console.log(formData[key]);
+  //     console.log(key);
+  //   }
+  // }
+
+  // formData.value = JSON.parse(localStorage.getItem("formData"));
+  // formData.firstName = JSON.parse(localStorage.getItem("firstName"));
+  // formData.secondName = JSON.parse(localStorage.getItem("secondName"));
+  // formData.thirdName = JSON.parse(localStorage.getItem("thirdName"));
+  // formData.fourthName = JSON.parse(localStorage.getItem("fourthName"));
+  // formData.dob = JSON.parse(localStorage.getItem("dob"));
+  // formData.gender = JSON.parse(localStorage.getItem("gender"));
+  // formData.resident = JSON.parse(localStorage.getItem("resident"));
+  // formData.Id = JSON.parse(localStorage.getItem("Id"));
+  // formData.IdNo = JSON.parse(localStorage.getItem("IdNo"));
+  // formData.nationality = JSON.parse(localStorage.getItem("nationality"));
+});
+
+// console.log("Data: ", data.value);
 const rules = computed(() => {
   return {
-    fisrstName: { required, minLength: minLength(3) },
+    firstName: { required, minLength: minLength(3) },
     secondName: { required, minLength: minLength(3) },
     thirdName: { required, minLength: minLength(3) },
     fourthName: { required, minLength: minLength(3) },
@@ -51,9 +98,9 @@ const rules = computed(() => {
 
     resident: { required },
 
-    Id: { required },
+    idType: { required },
 
-    IdNo: { required },
+    idNumber: { required },
     nationality: { required },
   };
 });
@@ -78,15 +125,17 @@ const checkForm = async () => {
         <form action="submit" @submit="checkForm">
           <div class="grid md:grid-cols-4 md:gap-6">
             <div class="relative z-0 mb-6 w-full group">
-              <input required v-model="formData.fisrstName" placeholder="First Name" type="text" id="base-input"
+              <input required v-model="formData.firstName"              onkeydown="return /[a-z]/i.test(event.key)"
+ placeholder="First Name" type="text" id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
-                v-for="error of v$.fisrstName.$errors" :key="error.$uid">
+                v-for="error of v$.firstName.$errors" :key="error.$uid">
                 {{ error.$message }}
               </span>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-              <input required v-model="formData.secondName" placeholder="Second Name" type="text" id="base-input"
+              <input required v-model="formData.secondName"              onkeydown="return /[a-z]/i.test(event.key)"
+ placeholder="Second Name" type="text" id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
                 v-for="error of v$.secondName.$errors" :key="error.$uid">
@@ -94,7 +143,8 @@ const checkForm = async () => {
               </span>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-              <input required v-model="formData.thirdName" placeholder="Third Name" type="text" id="base-input"
+              <input required v-model="formData.thirdName"              onkeydown="return /[a-z]/i.test(event.key)"
+ placeholder="Third Name" type="text" id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
                 v-for="error of v$.thirdName.$errors" :key="error.$uid">
@@ -102,7 +152,8 @@ const checkForm = async () => {
               </span>
             </div>
             <div class="relative z-0 mb-6 w-full">
-              <input required v-model="formData.fourthName" placeholder="Fourth Name" type="text" id="base-input"
+              <input required v-model="formData.fourthName"              onkeydown="return /[a-z]/i.test(event.key)"
+ placeholder="Fourth Name" type="text" id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
                 v-for="error of v$.fourthName.$errors" :key="error.$uid">
@@ -147,7 +198,10 @@ const checkForm = async () => {
           </div>
           <div class="grid md:grid-cols-2 md:gap-20">
             <div class="relative z-10 mb-6 w-full group">
-              <DropDownNation v-model="formData.nationality" />
+              <DropDownNation
+              v-model="formData.nationality"
+              :value="formData.nationality"
+            />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
                 v-for="error of v$.nationality.$errors" :key="error.$uid">
                 {{ error.$message }}
@@ -182,14 +236,14 @@ const checkForm = async () => {
               <div class="flex flex-row relative z-0 w-full group">
                 <div
                   class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700">
-                  <input required v-model="formData.Id" :value="true" id="i-1" type="radio" name="bordered-radio5"
+                  <input required v-model="formData.idType" :value="true" id="i-1" type="radio" name="bordered-radio5"
                     class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600" />
                   <label for="i-1"
                     class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300">Passport</label>
                 </div>
                 <div
                   class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700">
-                  <input required v-model="formData.Id" :value="false" id="i-2" type="radio" name="bordered-radio5"
+                  <input required v-model="formData.idType" :value="false" id="i-2" type="radio" name="bordered-radio5"
                     class="w-fit h-2.5 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600" />
                   <label for="i-2" class="w-full py-2.5 ml-2 text-sm font-sm text-gray-500 dark:text-gray-300">National
                     Number</label>
@@ -200,14 +254,30 @@ const checkForm = async () => {
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-0 mb-6 w-full">
-              <input required v-model="formData.IdNo" placeholder="ID Number" type="text" id="base-input"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-              <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.IdNo.$errors"
-                :key="error.$uid">
-                {{ error.$message }}
-              </span>
-            </div>
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.idType.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
+          </div>
+          <div class="relative z-0 mb-6 w-full">
+            <input
+              required
+              v-model="formData.idNumber"
+              placeholder="ID Number"
+              type="text"
+              id="base-input"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <span
+              class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+              v-for="error of v$.idNumber.$errors"
+              :key="error.$uid"
+            >
+              {{ error.$message }}
+            </span>
           </div>
         </form>
       </div>

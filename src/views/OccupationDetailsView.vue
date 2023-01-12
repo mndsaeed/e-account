@@ -17,13 +17,13 @@ import {
   helpers,
   maxLength,
 } from "@vuelidate/validators";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, watch, onMounted } from "vue";
 const router = useRouter();
 
 const formData = reactive({
   employersName: "",
   department: "",
-  area: "",
+  bArea: "",
   phoneNumber: "",
   bType: "",
   bSector: "",
@@ -31,11 +31,23 @@ const formData = reactive({
   salary: "",
 });
 
+watch(formData, (formData) => {
+  for (const property in formData) {
+    localStorage.setItem(property, JSON.stringify(formData[property]));
+  }
+});
+onMounted(() => {
+  for (const property in formData) {
+    formData[property] = JSON.parse(localStorage.getItem(property));
+    console.log(property);
+  }
+});
+
 const rules = computed(() => {
   return {
     employersName: { required },
     department: { required },
-    area: { required },
+    bArea: { required },
     phoneNumber: {
       required,
       minLength: minLength(10),
@@ -92,9 +104,9 @@ const validate = async () => {
         <div class="grid md:grid-cols-2 md:gap-20">
           <div class="flex flex-row relative w-full group">
             <div class="relative mb-6 w-full">
-              <input v-model="formData.area" placeholder="Area" type="text" id="base-input"
+              <input v-model="formData.bArea" placeholder="Area" type="text" id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-              <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.area.$errors"
+              <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.bArea.$errors"
                 :key="error.$uid">
                 {{ error.$message }}
               </span>
@@ -115,14 +127,14 @@ const validate = async () => {
         <div class="flex flex-col text-left space-y-2 mb-5">
           <div class="grid md:grid-cols-2 md:gap-20">
             <div class="z-50 relative mb-6 w-full group">
-              <DropBtype v-model="formData.bType" />
+              <DropBtype v-model="formData.bType" :value="formData.bType" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.bType.$errors"
                 :key="error.$uid">
                 {{ error.$message }}
               </span>
             </div>
             <div class="z-50 relative mb-6 w-full group">
-              <DropBsector v-model="formData.bSector" />
+              <DropBsector v-model="formData.bSector" :value="formData.bSector" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
                 v-for="error of v$.bSector.$errors" :key="error.$uid">
                 {{ error.$message }}
@@ -131,14 +143,14 @@ const validate = async () => {
           </div>
           <div class="grid md:grid-cols-2 md:gap-20">
             <div class="z-40 relative mb-6 w-full group">
-              <DropIncome v-model="formData.iwr" />
+              <DropIncome v-model="formData.iwr" :value="formData.iwr" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.iwr.$errors"
                 :key="error.$uid">
                 {{ error.$message }}
               </span>
             </div>
             <div class="z-40 relative mb-6 w-full group">
-              <DropSalary v-model="formData.salary" />
+              <DropSalary v-model="formData.salary" :value="formData.salary" />
               <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.salary.$errors"
                 :key="error.$uid">
                 {{ error.$message }}

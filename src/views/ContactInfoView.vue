@@ -14,7 +14,7 @@ import {
   sameAs,
   helpers,
 } from "@vuelidate/validators";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, onMounted, watch } from "vue";
 const router = useRouter();
 
 const formData = reactive({
@@ -22,10 +22,22 @@ const formData = reactive({
   city: "",
   area: "",
   street: "",
-  pobox: "",
+  poBox: "",
   houseNumber: "",
   email: "",
   mobileNumber: "",
+});
+
+watch(formData, (formData) => {
+  for (const property in formData) {
+    localStorage.setItem(property, JSON.stringify(formData[property]));
+  }
+});
+onMounted(() => {
+  for (const property in formData) {
+    formData[property] = JSON.parse(localStorage.getItem(property));
+    console.log(property);
+  }
 });
 
 const rules = computed(() => {
@@ -66,14 +78,14 @@ const validate = async () => {
       <div class="flex flex-col text-left space-y-2 mb-5">
         <div class="grid md:grid-cols-2 md:gap-20">
           <div class="z-10 relative mb-6 w-full group">
-            <DropState v-model="formData.state" />
+            <DropState v-model="formData.state" :value="formData.state" />
             <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.state.$errors"
               :key="error.$uid">
               {{ error.$message }}
             </span>
           </div>
           <div class="relative mb-6 w-full group">
-            <DropCity v-model="formData.city" />
+            <DropCity v-model="formData.city" :value="formData.city" />
             <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.city.$errors"
               :key="error.$uid">
               {{ error.$message }}
