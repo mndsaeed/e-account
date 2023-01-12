@@ -42,7 +42,7 @@ const props = defineProps({
       </li>
       <li
         class="flex md:w-fit items-center after:content-[''] after:w-10 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-2 xl:after:mx-2 dark:after:border-gray-700"
-        :class="step >= 1 ? 'text-primary':''"
+        :class="step > 1 ? 'text-primary':''"
       >
         <span
           class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500"
@@ -73,7 +73,7 @@ const props = defineProps({
       </li>
       <li
         class="flex md:w-fit items-center after:content-[''] after:w-10 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-2 xl:after:mx-2 dark:after:border-gray-700"
-        :class="step >= 2 ? 'text-primary':''"
+        :class="step > 2 ? 'text-primary':''"
         >
         <span
           class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500"
@@ -102,7 +102,7 @@ const props = defineProps({
       </li>
       <li
         class="flex md:w-fit items-center after:content-[''] after:w-10 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-2 xl:after:mx-2 dark:after:border-gray-700"
-        :class="step >= 3 ? 'text-primary':''"
+        :class="step > 3 ? 'text-primary':''"
       >
         <span
           class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500"
@@ -133,7 +133,7 @@ const props = defineProps({
       </li>
       <li
         class="flex md:w-fit items-center after:content-[''] after:w-10 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-2 xl:after:mx-2 dark:after:border-gray-700"
-        :class="step >= 4 ? 'text-primary':''"
+        :class="step > 4 ? 'text-primary':''"
         >
         <span
           class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500"
@@ -161,7 +161,8 @@ const props = defineProps({
           </h6>
         </span>
       </li>
-      <li class="flex items-center"         :class="step >= 6 ? 'text-primary':''"
+      <li class="flex items-center"         
+      :class="step > 6 ? 'text-primary':''"
         >
 
         
