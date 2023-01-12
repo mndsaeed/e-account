@@ -15,10 +15,6 @@ const validate = async () => {
 </script>
 <template>
   <baseLayout>
-    <!-- <div class="flex items-center justify-center mr-10 h-screen columns-2"> -->
-    <!-- <div
-      class="w-full max-w-lg p-4 backdrop-blur-xl rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
-    > -->
     <form @submit.prevent="validate" class="space-y-6" action="#">
       <h5
         class="inline-block text-xl font-medium text-gray-300 dark:text-white text-center"
@@ -34,7 +30,6 @@ const validate = async () => {
         >
         <input
           type="email"
-          v-model="emailTest"
           name="email"
           id="email"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -72,11 +67,10 @@ const validate = async () => {
       <!-- <router-link to="signedin"> -->
       <button
         type="submit"
-        class="w-full mt-2 text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="w-full mt-2 text-white border-white border bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Sign In
       </button>
-      <!-- </router-link> -->
     </form>
     <!-- </div> -->
     <!-- </div> -->
