@@ -6,8 +6,8 @@ import TheBg from "@/components/TheBg.vue";
 <template>
   <TheBg>
     <FormCard>
-      <RouterView />
-      <!-- <slot></slot> -->
+      <!-- <RouterView /> -->
+      <slot/>
     </FormCard>
   </TheBg>
 </template>
