@@ -6,7 +6,9 @@ import Form from "../layouts/Form.vue";
 
 <template>
   <Form>
-    <TheStepper :step="7" />
+    <div class="w-full flex items-center justify-center max-sm:px-5">
+      <TheStepper :step="7" />
+    </div>
     <div class="flex flex-col justify-center items-center mt-24 text-primary">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="w-20 h-20">
