@@ -36,7 +36,7 @@ const props = defineProps({
             ><div class="mx-1.5 my-[1px] text-xs text-white">1</div></span
           >
             <h6 :class="step != 1 ? 'max-sm:hidden' : '' ">
-              Personal <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+              Personal<span class="hidden sm:inline-flex sm:ml-2">Info</span>
             </h6>
         </span>
       </li>
@@ -66,7 +66,7 @@ const props = defineProps({
           >
 
           <h6 :class="step != 2 ? 'max-sm:hidden' : '' ">
-            Contact <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+            Contact<span class="hidden sm:inline-flex sm:ml-2">Info</span>
           </h6>
 
         </span>
@@ -96,7 +96,7 @@ const props = defineProps({
             ><div class="mx-1.5 my-[1px] text-xs">3</div></span
           >
           <h6 :class="step != 3 ? 'max-sm:hidden' : '' ">
-            Occupation <span class="hidden sm:inline-flex sm:ml-2">Details</span>
+            Occupation<span class="hidden sm:inline-flex sm:ml-2">Details</span>
           </h6>
         </span>
       </li>
@@ -126,7 +126,7 @@ const props = defineProps({
           >
 
           <h6 :class="step != 4 ? 'max-sm:hidden' : '' ">
-            CBOS <span class="hidden sm:inline-flex sm:ml-2">Form</span>
+            CBOS<span class="hidden sm:inline-flex sm:ml-2">Form</span>
           </h6>
 
         </span>
@@ -157,12 +157,12 @@ const props = defineProps({
             ><div class="mx-1.5 my-[1px] text-xs">5</div></span
           >
           <h6 :class="step != 5 ? 'max-sm:hidden' : '' ">
-            Documents <span class="hidden sm:inline-flex sm:ml-2">Upload</span>
+            Documents<span class="hidden sm:inline-flex sm:ml-2">Upload</span>
           </h6>
         </span>
       </li>
       <li class="flex items-center"         
-      :class="step > 6 ? 'text-primary':''"
+      :class="step >= 6 ? 'text-primary':''"
         >
 
         
@@ -184,8 +184,7 @@ const props = defineProps({
           ><div class="mx-1.5 my-[1px] text-xs">6</div></span
         >
         <h6 :class="step != 6 ? 'max-sm:hidden' : '' ">
-          Review <span class="hidden sm:inline-flex sm:ml-2">&</span>
-          <span class="hidden sm:inline-flex sm:ml-2">Submit</span>  
+          Review<span class="hidden sm:inline-flex sm:ml-2">&</span><span class="hidden sm:inline-flex sm:ml-2">Submit</span>  
         </h6>
       </li>
     </ol>
