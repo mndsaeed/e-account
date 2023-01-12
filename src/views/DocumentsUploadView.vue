@@ -1,10 +1,15 @@
 <script setup>
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import Form from "@/layouts/Form.vue";
 </script>
 
 <template>
+  <Form>
+    <div class="w-full flex items-center justify-center max-sm:px-5">
   <TheStepper :step="5" />
+</div>
+
   <!-- <div class="my-5 mb-6">
     <ol
       class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
@@ -245,6 +250,7 @@ import TheStepper from "@/components/TheStepper.vue";
       </div>
     </div>
   </div>
+</Form>
 
   <!-- <div class="flex flex-col items-end justify-end"> -->
   <!-- <router-link to="/form/submit"> -->

@@ -5,6 +5,7 @@ import DropIncome from "@/components/DropDownIncome.vue";
 import DropSalary from "@/components/DropDownSrange.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import Form from "@/layouts/Form.vue";
 
 import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
@@ -60,8 +61,11 @@ const validate = async () => {
 </script>
 
 <template>
+  <Form>
+    <div class="w-full flex items-center justify-center max-sm:px-5">
+      <TheStepper :step="3" />
+    </div>
   <div class="flex flex-col px-5 w-full pb-5">
-    <TheStepper :step="3" />
     <!-- <div class="my-5 mb-10">
       <ol
         class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
@@ -318,4 +322,5 @@ const validate = async () => {
     <!-- </router-link> -->
     <!-- </div> -->
   </div>
+</Form>
 </template>

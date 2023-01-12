@@ -1,9 +1,11 @@
 <script setup>
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import Form from "../layouts/Form.vue";
 </script>
 
 <template>
+  <Form>
   <TheStepper :step="7" />
   <!-- <div class="my-5 mb-6">
     <ol
@@ -166,4 +168,5 @@ import TheStepper from "@/components/TheStepper.vue";
       <BaseButton buttonName="Sign Out" class="w-32" />
     </router-link>
   </div>
+</Form>
 </template>

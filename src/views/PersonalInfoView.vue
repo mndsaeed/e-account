@@ -5,6 +5,7 @@ import FormCard from "@/components/FormCard.vue";
 import DropDownNation from "@/components/DropDownNation.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import Form from "@/layouts/Form.vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -68,8 +69,11 @@ const checkForm = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col px-5 w-full pb-5">
+<Form>
+  <div class="w-full flex items-center justify-center max-sm:px-5">
     <TheStepper class="mb-10" :step="1" />
+  </div>
+  <div class="flex flex-col px-5 w-full pb-5">
     <div class="flex flex-col text-left space-y-2 mb-5">
       <form action="submit" @submit="checkForm">
         <div class="grid md:grid-cols-4 md:gap-6">
@@ -142,7 +146,7 @@ const checkForm = async () => {
             </span>
           </div>
         </div>
-        <div class="grid md:grid-cols-2 md:gap-20">
+        <div class="grid md:grid-cols-2 md:gap-20 max-sm:mb-5">
           <div class="relative z-0 mb-6 w-full group">
             <input
               required
@@ -221,7 +225,7 @@ const checkForm = async () => {
               {{ error.$message }}
             </span>
           </div>
-          <div class="flex flex-col">
+          <div class="flex flex-col max-sm:flex-row max-sm:mb-5">
             <div class="flex flex-row relative z-0 w-full group">
               <div
                 class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
@@ -354,4 +358,5 @@ const checkForm = async () => {
       <!-- </router-link> -->
     </div>
   </div>
+</Form>
 </template>

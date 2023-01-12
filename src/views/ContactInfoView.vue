@@ -3,6 +3,7 @@ import DropState from "@/components/DropDownState.vue";
 import DropCity from "@/components/DropDownCity.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import Form from "@/layouts/Form.vue";
 import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import {
@@ -145,8 +146,11 @@ const validate = async () => {
       </li>
     </ol>
   </div> -->
+  <Form>
+    <div class="w-full flex items-center justify-center max-sm:px-5">
+      <TheStepper :step="2" />
+    </div>
   <div class="flex flex-col px-5 w-full pb-5">
-    <TheStepper :step="2" />
     <div class="flex flex-col text-left space-y-2 mb-5">
       <div class="grid md:grid-cols-2 md:gap-20">
         <div class="z-10 relative mb-6 w-full group">
@@ -315,4 +319,5 @@ const validate = async () => {
       </div>
     </div>
   </div>
+</Form>
 </template>
