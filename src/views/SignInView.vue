@@ -6,18 +6,16 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const emailTest = "";
 const validate = async () => {
-  if (emailTest === "com@test.com") {
+
     router.push("/signedin");
-  } else {
-    router.push("/form/personal-info");
-  }
+ 
 };
 </script>
 <template>
   <baseLayout>
     <form @submit.prevent="validate" class="space-y-6" action="#">
       <h5
-        class="inline-block text-xl font-medium text-gray-300 dark:text-white text-center"
+        class="inline-block text-xl font-medium text-center text-gray-300 dark:text-white"
       >
         Sign In
       </h5>

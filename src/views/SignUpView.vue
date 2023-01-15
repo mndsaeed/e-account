@@ -73,11 +73,11 @@ const submitForm = async () => {
 <template>
   <baseLayout>
     <!-- <div
-      class="w-full max-w-lg p-4 max-sm:bg-primary backdrop-blur-xl max-sm:backdrop-blur-0 rounded-sm shadow-xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+      class="w-full max-w-lg p-4 rounded-sm shadow-xl max-sm:bg-primary backdrop-blur-xl max-sm:backdrop-blur-0 sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
     > -->
     <form class="space-y-6" action="">
       <h5
-        class="inline-block text-xl font-medium text-gray-300 dark:text-white text-center"
+        class="inline-block text-xl font-medium text-center text-gray-300 dark:text-white"
       >
         Sign Up
       </h5>
@@ -98,7 +98,7 @@ const submitForm = async () => {
         />
 
         <span
-          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+          class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
           v-for="error of v$.email.$errors"
           :key="error.$uid"
         >
@@ -172,7 +172,7 @@ const submitForm = async () => {
         </span>
       </div>
       <div class="flex flex-col justify-start mb-2">
-        <router-link to="signIn">
+        <router-link to="/signIn">
           <a
             href="#"
             class="mr-auto text-sm text-right text-blue-500 underline dark:text-blue-500"
@@ -180,7 +180,7 @@ const submitForm = async () => {
           </a>
         </router-link>
       </div>
-      <div class="w-full flex">
+      <div class="flex w-full">
         <button
           @click.prevent="submitForm"
           class="w-full mt-2 text-white bg-primary border border-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
