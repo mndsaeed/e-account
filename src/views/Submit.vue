@@ -220,9 +220,9 @@ const validate = async () => {
           </router-link>
         </div>
         <div class="flex justify-end items-end mt-[4.5rem] max-sm:mt-0">
-          <router-link to="/form/submit">
-          <BaseButton :icon="mdiArrowRight" @click="validate" responsive buttonName="Next" class="w-32" />
-          </router-link>
+          <!-- <router-link to="/form/success"> -->
+          <BaseButton :icon="mdiArrowRight" @click="validate" responsive buttonName="Submit" class="w-32" />
+          <!-- </router-link> -->
         </div>
       </div>
     </div>
