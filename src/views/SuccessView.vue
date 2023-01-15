@@ -2,6 +2,7 @@
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
 import Form from "../layouts/Form.vue";
+import { mdiLogout } from "@mdi/js";
 </script>
 
 <template>
@@ -22,9 +23,9 @@ import Form from "../layouts/Form.vue";
     <div class="flex justify-center items-center text-xs text-slate-700">
       Please allow 3-5 working days for feedback
     </div>
-    <div class="flex flex-col items-end mt-[12rem]">
+    <div class="flex flex-col items-end mt-[12rem] mr-10">
       <router-link to="/signIn">
-        <BaseButton buttonName="Sign Out" class="w-32" />
+        <BaseButton :icon="mdiLogout" responsive buttonName="Sign Out" class="w-32" />
       </router-link>
     </div>
   </Form>

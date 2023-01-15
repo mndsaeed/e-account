@@ -117,14 +117,14 @@ const checkForm = async () => {
 
 <template>
   <Form>
-    <div class="w-full flex items-center justify-center max-sm:px-5">
+    <div class="flex items-center justify-center w-full max-sm:px-5">
       <TheStepper class="mb-10" :step="1" />
     </div>
-    <div class="flex flex-col px-5 w-full pb-5">
-      <div class="flex flex-col text-left space-y-2 mb-5">
+    <div class="flex flex-col w-full px-5 pb-5">
+      <div class="flex flex-col mb-5 space-y-2 text-left">
         <form action="submit" @submit="checkForm">
           <div class="grid md:grid-cols-4 md:gap-6">
-            <div class="relative z-0 mb-6 w-full group">
+            <div class="relative z-0 w-full mb-6 group">
               <input
                 required
                 v-model="formData.firstName"
@@ -135,14 +135,14 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.firstName.$errors"
                 :key="error.$uid"
               >
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-0 mb-6 w-full group">
+            <div class="relative z-0 w-full mb-6 group">
               <input
                 required
                 v-model="formData.secondName"
@@ -153,14 +153,14 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.secondName.$errors"
                 :key="error.$uid"
               >
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-0 mb-6 w-full group">
+            <div class="relative z-0 w-full mb-6 group">
               <input
                 required
                 v-model="formData.thirdName"
@@ -171,14 +171,14 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.thirdName.$errors"
                 :key="error.$uid"
               >
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-0 mb-6 w-full">
+            <div class="relative z-0 w-full mb-6">
               <input
                 required
                 v-model="formData.fourthName"
@@ -189,7 +189,7 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.fourthName.$errors"
                 :key="error.$uid"
               >
@@ -198,7 +198,7 @@ const checkForm = async () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-20 max-sm:mb-5">
-            <div class="relative z-0 mb-6 w-full group">
+            <div class="relative z-0 w-full mb-6 group">
               <input
                 required
                 v-model="formData.dob"
@@ -210,7 +210,7 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.dob.$errors"
                 :key="error.$uid"
               >
@@ -218,9 +218,9 @@ const checkForm = async () => {
               </span>
             </div>
             <div class="flex flex-col">
-              <div class="flex flex-row relative z-0 w-full group">
+              <div class="relative z-0 flex flex-row w-full group">
                 <div
-                  class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 mr-5 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -238,7 +238,7 @@ const checkForm = async () => {
                   >
                 </div>
                 <div
-                  class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -257,7 +257,7 @@ const checkForm = async () => {
                 </div>
               </div>
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.gender.$errors"
                 :key="error.$uid"
               >
@@ -266,13 +266,13 @@ const checkForm = async () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-20">
-            <div class="relative z-10 mb-6 w-full group">
+            <div class="relative z-10 w-full mb-6 group">
               <DropDownNation
                 v-model="formData.nationality"
                 :value="formData.nationality"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.nationality.$errors"
                 :key="error.$uid"
               >
@@ -280,9 +280,9 @@ const checkForm = async () => {
               </span>
             </div>
             <div class="flex flex-col max-sm:flex-row max-sm:mb-5">
-              <div class="flex flex-row relative z-0 w-full group">
+              <div class="relative z-0 flex flex-row w-full group">
                 <div
-                  class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 mr-5 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -300,7 +300,7 @@ const checkForm = async () => {
                   >
                 </div>
                 <div
-                  class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -319,7 +319,7 @@ const checkForm = async () => {
                 </div>
               </div>
               <span
-                class="font-semibold text-xs text-red-600 dark:text-red-400"
+                class="text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.resident.$errors"
                 :key="error.$uid"
               >
@@ -328,10 +328,10 @@ const checkForm = async () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-20">
-            <div class="relative z-0 mb-6 w-full group">
-              <div class="flex flex-row relative z-0 w-full group">
+            <div class="relative z-0 w-full mb-6 group">
+              <div class="relative z-0 flex flex-row w-full group">
                 <div
-                  class="flex items-center w-full mr-5 pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 mr-5 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -349,7 +349,7 @@ const checkForm = async () => {
                   >
                 </div>
                 <div
-                  class="flex items-center w-full pl-4 border bg-gray-50 border-gray-200 rounded-sm dark:border-gray-700"
+                  class="flex items-center w-full pl-4 border border-gray-200 rounded-sm bg-gray-50 dark:border-gray-700"
                 >
                   <input
                     required
@@ -368,7 +368,7 @@ const checkForm = async () => {
                 </div>
               </div>
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.idType.$errors"
                 :key="error.$uid"
               >
@@ -376,7 +376,7 @@ const checkForm = async () => {
               </span>
             </div>
 
-            <div class="relative z-0 mb-6 w-full">
+            <div class="relative z-0 w-full mb-6">
               <input
                 required
                 v-model="formData.idNumber"
@@ -386,7 +386,7 @@ const checkForm = async () => {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
               <span
-                class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
                 v-for="error of v$.idNumber.$errors"
                 :key="error.$uid"
               >
@@ -397,17 +397,17 @@ const checkForm = async () => {
         </form>
       </div>
     </div>
-    <div class="flex flex-row justify-end gap-5">
-      <div class="flex justify-end items-end">
+    <div class="flex flex-row justify-end gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5">
+      <div class="flex items-end justify-end">
         <router-link to="/signin">
           <BaseButton
             @click="checkForm"
             buttonName="Save and Quit"
-            class="w-32 bg-red-600 hover:bg-red-700"
+            class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
           />
         </router-link>
       </div>
-      <div class="flex justify-end items-end mt-16">
+      <div class="flex items-end justify-end mt-16 max-sm:mt-0">
         <!-- <router-link to="/form/contact-info"> -->
         <BaseButton @click="checkForm" buttonName="Next" class="w-32" />
         <!-- </router-link> -->

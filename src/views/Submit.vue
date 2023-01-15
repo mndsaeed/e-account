@@ -2,6 +2,7 @@
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
 import Form from "@/layouts/Form.vue";
+import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
 
 import { ref } from "vue";
 import {
@@ -67,7 +68,7 @@ const validate = async () => {
 
 <template>
   <Form>
-    <div class="w-full flex items-center justify-center max-sm:px-5">
+    <div class="flex items-center justify-center w-full max-sm:px-5">
 
       <TheStepper :step="6" />
     </div>
@@ -75,28 +76,28 @@ const validate = async () => {
     <div class="flex flex-col max-sm:px-7">
       <div class="mb-5">
         <router-link to="/Form/Personal-info">
-          <a class="text-primary font-bold text-md"> Personal Information </a>
+          <a class="font-bold text-primary text-md"> Personal Information </a>
         </router-link>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
@@ -104,28 +105,28 @@ const validate = async () => {
       </div>
       <div class="mb-5">
         <router-link to="/form/contact-info">
-          <a class="text-primary font-bold text-md">Contact Information</a>
+          <a class="font-bold text-primary text-md">Contact Information</a>
         </router-link>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
@@ -133,28 +134,28 @@ const validate = async () => {
       </div>
       <div class="mb-5">
         <router-link to="/form/occupation-details">
-          <a class="text-primary font-bold text-md">Occupation Details</a>
+          <a class="font-bold text-primary text-md">Occupation Details</a>
         </router-link>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
@@ -162,66 +163,69 @@ const validate = async () => {
       </div>
       <div class="mb-3">
         <router-link to="/form/cbos-form">
-          <a class="text-primary font-bold text-md">CBOS Form</a>
+          <a class="font-bold text-primary text-md">CBOS Form</a>
         </router-link>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
         <div>
-          <span class="font-semibold text-sm">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Lorem ipsum: </span>
           <span class="text-xs">dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
             iure illo asperiores! Esse, praesentium.
           </span>
         </div>
       </div>
-      <div class="grid md:grid-cols-2 md:gap-20 mt-2">
+      <div class="grid mt-2 md:grid-cols-2 md:gap-20">
         <div class="flex items-center">
           <input v-model="formData.terms" id="default-checkbox" type="checkbox" value=""
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
           <label for="default-checkbox"
-            class="ml-2 text-sm font-medium dark:text-gray-300 text-blue-600 hover:underline underline"><a
+            class="ml-2 text-sm font-medium text-blue-600 underline dark:text-gray-300 hover:underline"><a
               @click="openModal" href="#">
               I've the Terms and Conditions.</a></label>
-          <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.terms.$errors"
+          <span class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400" v-for="error of v$.terms.$errors"
             :key="error.$uid">
             {{ error.$message }}
           </span>
         </div>
       </div>
-      <div class="flex flex-row justify-between gap-5 h-fit mt-10">
-        <div class="flex justify-start items-end">
-          <router-link to="/form/upload">
-            <BaseButton buttonName="Previous" class="w-32 bg-indigo-900 hover:bg-indigo-800" />
+      
+    <div class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5">
+      <div class="flex justify-start items-end mt-[4.5rem] max-sm:mt-0">
+        <router-link to="/form/upload">
+          <BaseButton :icon="mdiArrowLeft" responsive buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800" />
+        </router-link>
+      </div>
+      <div class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5">
+        <div class="flex items-end justify-end">
+          <router-link to="/signin">
+            <BaseButton :icon="mdiFlagCheckered" responsive buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]" />
           </router-link>
         </div>
-        <div class="flex gap-5">
-          <div class="flex justify-end items-end">
-            <router-link to="/signin">
-              <BaseButton buttonName="Save and Quit" class="w-32 bg-red-600 hover:bg-red-700" />
-            </router-link>
-          </div>
-          <div class="flex justify-end items-end">
-            <!-- <router-link to="/form/success"> -->
-            <BaseButton @click="validate" buttonName="Submit" class="w-32" />
-            <!-- </router-link> -->
-          </div>
+        <div class="flex justify-end items-end mt-[4.5rem] max-sm:mt-0">
+          <router-link to="/form/submit">
+          <BaseButton :icon="mdiArrowRight" @click="validate" responsive buttonName="Next" class="w-32" />
+          </router-link>
         </div>
       </div>
+    </div>
       <!-- <div class="flex flex-col items-end justify-end"> -->
       <!-- <router-link to="/form/success"> -->
       <!-- <BaseButton @click="validate" buttonName="Submit" class="w-32" /> -->
@@ -236,12 +240,12 @@ const validate = async () => {
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
-          <div class="flex min-h-full items-center justify-center p-4 text-center">
+          <div class="flex items-center justify-center min-h-full p-4 text-center">
             <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
               enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
               leave-to="opacity-0 scale-95">
               <DialogPanel
-                class="w-full max-w-md transform overflow-hidden rounded-sm bg-white p-6 text-left align-middle shadow-xl transition-all">
+                class="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white rounded-sm shadow-xl">
                 <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
                   Terms and Conditions
                 </DialogTitle>
@@ -289,7 +293,7 @@ const validate = async () => {
 
                 <div class="mt-4">
                   <button type="button"
-                    class="inline-flex justify-center w-full rounded-sm border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-sm bg-primary hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     @click="closeModal">
                     Accept
                   </button>
