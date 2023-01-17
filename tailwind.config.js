@@ -75,7 +75,7 @@ module.exports = {
       "7xl": "80rem",
     },
     extend: {
-      backgroundImage: { bgmain: "url('./assets/imgs/SFB-logo.png') " },
+      backgroundImage: { bgmain: "url('@/assets/imgs/SFB-logo.png') " },
       colors: { primary: "#0A023F" },
     },
     spacing: {
