@@ -15,6 +15,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { reactive, computed, ref, onMounted, watch, toRefs, toRef } from "vue";
+import moment from "moment";
 
 // export default {
 //   components: { BaseCard, TheBg, BaseDropDown, DropDown, Basebutton },
@@ -27,6 +28,10 @@ const router = useRouter();
 //   await router.push("/form/contact-info");
 // };
 // var data = ref(localStorage.getItem("formData"));
+
+let maxDobDate = moment().subtract(18, 'years').format('YYYY-MM-DD');
+
+// maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
 
 const formData = reactive({
   firstName: "",
@@ -203,7 +208,8 @@ const checkForm = async () => {
                 required
                 v-model="formData.dob"
                 placeholder="Date of Birth"
-                type="text"
+                type="date"
+                :max="maxDobDate"
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
                 id="base-input"
