@@ -3,7 +3,27 @@ import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
 import Form from "@/layouts/Form.vue";
 import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
+import { ref } from "vue";
 
+const personalPhoto = ref("Click to upload");
+const personalPhotoUpload = (event) => {
+  event.preventDefault();
+  personalPhoto.value = event.target.files[0].name
+};
+
+
+const idPhoto = ref("Click to upload");
+const idPhotoUpload = (event) => {
+  event.preventDefault();
+  idPhoto.value = event.target.files[0].name
+};
+
+
+const selfieHoldingId = ref("Click to upload");
+const selfieHoldingIdUpload = (event) => {
+  event.preventDefault();
+  selfieHoldingId.value = event.target.files[0].name
+};
 </script>
 
 <template>
@@ -13,30 +33,58 @@ import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
     </div>
     <div class="grid grid-rows-3 gap-2">
       <div class="flex items-center justify-center w-full">
-        <label for="dropzone-file"
+        <label for="dropzone-file1"
           class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-fit bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-          <div class="flex flex-col items-center justify-center pt-2 pb-2">
+          
+          <div v-if="personalPhoto == 'Click to upload'" class="flex flex-col items-center justify-center pt-2 pb-2">
             <svg aria-hidden="true" class="w-10 h-4 mb-1 text-gray-400" fill="none" stroke="currentColor"
               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
             </svg>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+              <path
+                  d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 34.988281 14.988281 A 1.0001 1.0001 0 0 0 34.171875 15.439453 L 23.970703 30.476562 L 16.679688 23.710938 A 1.0001 1.0001 0 1 0 15.320312 25.177734 L 24.316406 33.525391 L 35.828125 16.560547 A 1.0001 1.0001 0 0 0 34.988281 14.988281 z" />
+          </svg> -->
             <h1 class="font-bold text-primary">Personal Photo</h1>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span class="text-sm font-semibold">Click to upload</span> or drag
+              <span class="text-sm font-semibold">{{ personalPhoto }}</span> or drag
               and drop
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PNG or JPG (MAX. 3.5 MB)
             </p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
+
+          <div v-else class="flex flex-col items-center justify-center pt-2 pb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+              <path
+                  d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 34.988281 14.988281 A 1.0001 1.0001 0 0 0 34.171875 15.439453 L 23.970703 30.476562 L 16.679688 23.710938 A 1.0001 1.0001 0 1 0 15.320312 25.177734 L 24.316406 33.525391 L 35.828125 16.560547 A 1.0001 1.0001 0 0 0 34.988281 14.988281 z" />
+            </svg>
+            <h1 class="font-bold text-primary">Personal Photo</h1>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <span class="text-sm font-semibold">{{ personalPhoto }}</span></p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+            </p>
+          </div>
+          <input id="dropzone-file1" v-on:change="personalPhotoUpload" type="file" class="hidden" />
         </label>
       </div>
       <div class="flex items-center justify-center w-full">
-        <label for="dropzone-file"
+        <label for="dropzone-file2"
           class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-fit bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-          <div class="flex flex-col items-center justify-center pt-2 pb-2">
+          
+          <div v-if="idPhoto != 'Click to upload'" class="flex flex-col items-center justify-center pt-2 pb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+              <path
+                  d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 34.988281 14.988281 A 1.0001 1.0001 0 0 0 34.171875 15.439453 L 23.970703 30.476562 L 16.679688 23.710938 A 1.0001 1.0001 0 1 0 15.320312 25.177734 L 24.316406 33.525391 L 35.828125 16.560547 A 1.0001 1.0001 0 0 0 34.988281 14.988281 z" />
+            </svg>
+            <h1 class="font-bold text-primary">ID Photo</h1>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <span class="text-sm font-semibold">{{ idPhoto }}</span></p>
+          </div>
+
+          <div v-else class="flex flex-col items-center justify-center pt-2 pb-2">
             <svg aria-hidden="true" class="w-10 h-4 mb-1 text-gray-400" fill="none" stroke="currentColor"
               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,20 +92,31 @@ import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
             </svg>
             <h1 class="font-bold text-primary">ID Photo</h1>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span class="text-sm font-semibold">Click to upload</span> or drag
+              <span class="text-sm font-semibold">{{ idPhoto }}</span> or drag
               and drop
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PNG or JPG (MAX. 3.5 MB)
             </p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
+          <input id="dropzone-file2" v-on:change="idPhotoUpload" type="file" class="hidden" />
         </label>
       </div>
       <div class="flex items-center justify-center w-full">
-        <label for="dropzone-file"
+        <label for="dropzone-file3"
           class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-fit bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-          <div class="flex flex-col items-center justify-center pt-2 pb-2">
+          
+          <div v-if="selfieHoldingId != 'Click to upload'" class="flex flex-col items-center justify-center pt-2 pb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+              <path
+                  d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 34.988281 14.988281 A 1.0001 1.0001 0 0 0 34.171875 15.439453 L 23.970703 30.476562 L 16.679688 23.710938 A 1.0001 1.0001 0 1 0 15.320312 25.177734 L 24.316406 33.525391 L 35.828125 16.560547 A 1.0001 1.0001 0 0 0 34.988281 14.988281 z" />
+            </svg>
+            <h1 class="font-bold text-primary">Selfie Holding ID</h1>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <span class="text-sm font-semibold">{{ selfieHoldingId }}</span></p>
+          </div>
+          
+          <div v-else class="flex flex-col items-center justify-center pt-2 pb-2">
             <svg aria-hidden="true" class="w-10 h-4 mb-1 text-gray-400" fill="none" stroke="currentColor"
               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,14 +124,14 @@ import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
             </svg>
             <h1 class="font-bold text-primary">Selfie Holding ID</h1>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span class="text-sm font-semibold">Click to upload</span> or drag
+              <span class="text-sm font-semibold">{{ selfieHoldingId }}</span> or drag
               and drop
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PNG or JPG (MAX. 3.5 MB)
             </p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
+          <input id="dropzone-file3" v-on:change="selfieHoldingIdUpload" type="file" class="hidden" />
         </label>
       </div>
     </div>
