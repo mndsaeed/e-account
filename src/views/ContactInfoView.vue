@@ -17,31 +17,35 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { reactive, computed, ref, onMounted, watch } from "vue";
+
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const router = useRouter();
 
-const formData = reactive({
-  state: "",
-  city: "",
-  area: "",
-  street: "",
-  poBox: "",
-  houseNumber: "",
-  email: "",
-  mobileNumber: "",
-  branch: "",
-});
+// const formData = reactive({
+//   state: "",
+//   city: "",
+//   area: "",
+//   street: "",
+//   poBox: "",
+//   houseNumber: "",
+//   email: "",
+//   mobileNumber: "",
+//   branch: "",
+// });
 
-watch(formData, (formData) => {
-  for (const property in formData) {
-    localStorage.setItem(property, JSON.stringify(formData[property]));
-  }
-});
-onMounted(() => {
-  for (const property in formData) {
-    formData[property] = JSON.parse(localStorage.getItem(property));
-    console.log(property);
-  }
-});
+// watch(formData, (formData) => {
+//   for (const property in formData) {
+//     localStorage.setItem(property, JSON.stringify(formData[property]));
+//   }
+// });
+// onMounted(() => {
+//   for (const property in formData) {
+//     formData[property] = JSON.parse(localStorage.getItem(property));
+//     console.log(property);
+//   }
+// });
 
 const rules = computed(() => {
   return {

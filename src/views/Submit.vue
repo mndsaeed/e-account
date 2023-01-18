@@ -29,6 +29,9 @@ import { reactive, computed } from "vue";
 
 import { useRouter } from "vue-router";
 
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const isOpen = ref(false);
 
 function closeModal() {
@@ -44,9 +47,9 @@ const router = useRouter();
 //   await router.push("/form/contact-info");
 // };
 
-const formData = reactive({
-  terms: "",
-});
+// const formData = reactive({
+//   terms: "",
+// });
 
 const rules = computed(() => {
   return {
@@ -78,32 +81,31 @@ const validate = async () => {
           <a class="font-bold text-primary text-md"> Personal Information </a>
         </router-link>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Name: </span>
           <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
+            >{{ formData.firstName }} {{ formData.secondName
+            }}{{ formData.thirdName }} {{ formData.fourthName }}
           </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Date of Birth: </span>
+          <span class="text-xs">{{ formData.dob }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Gender: </span>
+          <span class="text-xs">{{ formData.gender }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Nationality: </span>
+          <span class="text-xs">{{ formData.nationality }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Residency: </span>
+          <span class="text-xs">{{ formData.resident }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">ID Number: </span>
+          <span class="text-xs">{{ formData.idNumber }} </span>
         </div>
       </div>
       <div class="mb-5">
@@ -111,32 +113,40 @@ const validate = async () => {
           <a class="font-bold text-primary text-md">Contact Information</a>
         </router-link>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">State: </span>
+          <span class="text-xs">{{ formData.state }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">City: </span>
+          <span class="text-xs">{{ formData.city }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Area: </span>
+          <span class="text-xs">{{ formData.area }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Street: </span>
+          <span class="text-xs">{{ formData.street }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">P.O Box: </span>
+          <span class="text-xs">{{ formData.poBox }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">HouseNumber: </span>
+          <span class="text-xs">{{ formData.houseNumber }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">E-mail: </span>
+          <span class="text-xs">{{ formData.email }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Mobile Number: </span>
+          <span class="text-xs">{{ formData.mobileNumber }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Preffered Branch: </span>
+          <span class="text-xs">{{ formData.branch }} </span>
         </div>
       </div>
       <div class="mb-5">
@@ -144,35 +154,47 @@ const validate = async () => {
           <a class="font-bold text-primary text-md">Occupation Details</a>
         </router-link>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Employers Name: </span>
+          <span class="text-xs">{{ formData.employersName }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Department: </span>
+          <span class="text-xs">{{ formData.department }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Area: </span>
+          <span class="text-xs">{{ formData.bArea }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Phone Number: </span>
+          <span class="text-xs">{{ formData.phoneNumber }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Business Type: </span>
           <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
+            >{{ formData.bType }}{{ formData.bTypeOther }}
           </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Business Sector: </span>
           <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
+            >{{ formData.bSector }}{{ formData.bSectorOther }}
           </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
+          <span class="text-sm font-semibold"
+            >Income and Wealth Resources:
+          </span>
           <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
+            >{{ formData.iwr }}{{ formData.iwrOther }}
           </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Monthly Salary: </span>
+          <span class="text-xs">{{ formData.salary }} </span>
         </div>
       </div>
-      <div class="mb-3">
+      <div class="mb-5">
         <router-link to="/form/cbos-form">
           <a class="font-bold text-primary text-md">CBOS Form</a>
         </router-link>
@@ -205,10 +227,36 @@ const validate = async () => {
           </span>
         </div>
       </div>
-      <div class="grid mt-2 md:grid-cols-2 md:gap-20">
+      <div class="">
+        <div class="flex items-center my-2">
+          <input
+            v-model="formData.atmCard"
+            id="default-checkbox"
+            type="checkbox"
+            value="atmCard"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+
+          <a class="ml-2 text-sm font-medium dark:text-gray-300">
+            Requst ATM Card
+          </a>
+        </div>
+        <div class="flex items-center mb-2">
+          <input
+            v-model="formData.cheque"
+            id="default-checkbox"
+            type="checkbox"
+            value="chequeBook"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+
+          <a class="ml-2 text-sm font-medium dark:text-gray-300">
+            Request Cheque Book
+          </a>
+        </div>
         <div class="flex items-center">
           <input
-            v-model="formData.terms"
+            v-model="formData.terms2"
             id="default-checkbox"
             type="checkbox"
             value=""

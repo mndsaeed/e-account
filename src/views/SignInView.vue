@@ -3,6 +3,10 @@ import baseLayout from "@/layouts/baseLayout.vue";
 import { email } from "@vuelidate/validators";
 import { reactive, computed, ref } from "vue";
 import { useRouter } from "vue-router";
+
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const router = useRouter();
 const emailTest = "";
 const validate = async () => {

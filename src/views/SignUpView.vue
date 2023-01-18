@@ -11,12 +11,16 @@ import {
 } from "@vuelidate/validators";
 import { reactive, computed, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
-const formData = reactive({
-  email: "",
-  mobileNumber: "",
-  password: "",
-  confirmPassword: "",
-});
+
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
+// const formData = reactive({
+//   email: "",
+//   mobileNumber: "",
+//   password: "",
+//   confirmPassword: "",
+// });
 
 watch(formData, (formData) => {
   for (const property in formData) {

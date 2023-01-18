@@ -14,11 +14,15 @@ import {
 
 import { useRouter } from "vue-router";
 import { ref, reactive, computed } from "vue";
+
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const router = useRouter();
 
-const formData = reactive({
-  accountType: "",
-});
+// const formData = reactive({
+//   accountType: "",
+// });
 const rules = computed(() => {
   return {
     accountType: { required },
@@ -66,7 +70,9 @@ const validate = async () => {
   <TheBg>
     <BaseCard>
       <div>
-        <div class="flex flex-col items-center justify-center text-center space-y-2 mb-5">
+        <div
+          class="flex flex-col items-center justify-center text-center space-y-2 mb-5"
+        >
           <div class="font-semibold text-primary text-3xl">
             <p>Account Type</p>
           </div>
@@ -79,8 +85,11 @@ const validate = async () => {
         <DropDown v-model="formData.accountType" />
       </div>
       <div class="text-center">
-        <span class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400" v-for="error of v$.accountType.$errors"
-          :key="error.$uid">
+        <span
+          class="mt-2 font-semibold text-xs text-red-600 dark:text-red-400"
+          v-for="error of v$.accountType.$errors"
+          :key="error.$uid"
+        >
           {{ error.$message }}
         </span>
       </div>

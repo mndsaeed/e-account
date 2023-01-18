@@ -19,30 +19,34 @@ import {
   maxLength,
 } from "@vuelidate/validators";
 import { reactive, computed, ref, watch, onMounted } from "vue";
+
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const router = useRouter();
 
-const formData = reactive({
-  employersName: "",
-  department: "",
-  bArea: "",
-  phoneNumber: "",
-  bType: "",
-  bSector: "",
-  iwr: "",
-  salary: "",
-});
+// const formData = reactive({
+//   employersName: "",
+//   department: "",
+//   bArea: "",
+//   phoneNumber: "",
+//   bType: "",
+//   bSector: "",
+//   iwr: "",
+//   salary: "",
+// });
 
-watch(formData, (formData) => {
-  for (const property in formData) {
-    localStorage.setItem(property, JSON.stringify(formData[property]));
-  }
-});
-onMounted(() => {
-  for (const property in formData) {
-    formData[property] = JSON.parse(localStorage.getItem(property));
-    console.log(property);
-  }
-});
+// watch(formData, (formData) => {
+//   for (const property in formData) {
+//     localStorage.setItem(property, JSON.stringify(formData[property]));
+//   }
+// });
+// onMounted(() => {
+//   for (const property in formData) {
+//     formData[property] = JSON.parse(localStorage.getItem(property));
+//     console.log(property);
+//   }
+// });
 
 const rules = computed(() => {
   return {
@@ -196,7 +200,7 @@ const validate = async () => {
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-50 w-full mb-2 group">
+            <div class="relative w-full mb-2 group">
               <label
                 class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
               >
@@ -217,7 +221,43 @@ const validate = async () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-20">
-            <div class="relative z-40 w-full mb-2 group">
+            <div
+              v-if="formData.bType == 'Other'"
+              class="relative w-full mb-2 group"
+            >
+              <label
+                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+              >
+                Business Type
+              </label>
+              <input
+                v-model="formData.bTypeOther"
+                placeholder="Other Business Type"
+                type="text"
+                id="base-input"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+            </div>
+            <div
+              v-if="formData.bSector == 'Other'"
+              class="relative w-full mb-2 group"
+            >
+              <label
+                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+              >
+                Business Sector
+              </label>
+              <input
+                v-model="formData.bSectorOther"
+                placeholder="Other Business Sector"
+                type="text"
+                id="base-input"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 md:gap-20">
+            <div class="relative w-full mb-2 group">
               <label
                 class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
               >
@@ -232,7 +272,7 @@ const validate = async () => {
                 {{ error.$message }}
               </span>
             </div>
-            <div class="relative z-40 w-full mb-2 group">
+            <div class="relative w-full mb-2 group">
               <label
                 class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
               >
@@ -249,11 +289,25 @@ const validate = async () => {
             </div>
           </div>
         </div>
+        <div
+          v-if="formData.iwr == 'Other'"
+          class="grid md:grid-cols-2 md:gap-20"
+        >
+          <div class="relative w-full mb-2 group">
+            <input
+              v-model="formData.iwrOther"
+              placeholder="Other Income and Weath Resources"
+              type="text"
+              id="base-input"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+        </div>
       </div>
       <div
         class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
       >
-        <div class="flex justify-start items-end mt-[4.5rem] max-sm:mt-0">
+        <div class="flex justify-start items-end max-sm:mt-0">
           <router-link to="/form/contact-info">
             <BaseButton
               :icon="mdiArrowLeft"
@@ -276,7 +330,7 @@ const validate = async () => {
               />
             </router-link>
           </div>
-          <div class="flex justify-end items-end mt-[4.5rem] max-sm:mt-0">
+          <div class="flex justify-end items-end mt-[3rem] max-sm:mt-0">
             <!-- <router-link to="/form/occupation-details"> -->
             <!-- <BaseButton buttonName="Next" class="w-32" /> -->
             <BaseButton

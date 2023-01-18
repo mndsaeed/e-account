@@ -27,6 +27,9 @@ import {
 } from "@vuelidate/validators";
 import { reactive, computed, ref, watch, onMounted } from "vue";
 
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+
 const isOpen = ref(false);
 
 function closeModal() {
@@ -38,34 +41,34 @@ function openModal() {
 
 const router = useRouter();
 
-const formData = reactive({
-  mothersName: "",
-  spouseName: "",
-  maritalStatus: "",
-  idType: "",
-  idNumber: "",
-  dateOfIssue: "",
-  dateOfExpiry: "",
-  cbosId: "",
-  terms: "",
-});
+// const formData = reactive({
+//   mothersName: "",
+//   spouseName: "",
+//   maritalStatus: "",
+//   idType: "",
+//   idNumber: "",
+//   dateOfIssue: "",
+//   dateOfExpiry: "",
+//   cbosId: "",
+//   terms: "",
+// });
 
-watch(formData, (formData) => {
-  for (const property in formData) {
-    localStorage.setItem(property, JSON.stringify(formData[property]));
-  }
-});
-onMounted(() => {
-  for (const property in formData) {
-    formData[property] = JSON.parse(localStorage.getItem(property));
-    console.log(property);
-  }
-});
+// watch(formData, (formData) => {
+//   for (const property in formData) {
+//     localStorage.setItem(property, JSON.stringify(formData[property]));
+//   }
+// });
+// onMounted(() => {
+//   for (const property in formData) {
+//     formData[property] = JSON.parse(localStorage.getItem(property));
+//     console.log(property);
+//   }
+// });
 
 const rules = computed(() => {
   return {
     mothersName: { required, minLength: minLength(3) },
-    spouseName: { required, minLength: minLength(3) },
+    // spouseName: { required, minLength: minLength(3) },
     maritalStatus: { required },
     idType: { required },
     idNumber: { required },
@@ -95,63 +98,12 @@ const validate = async () => {
     </div>
     <div class="flex flex-col w-full px-5">
       <!-- <div class="flex flex-col w-full px-5 pb-5"> -->
-      <div class="flex flex-col">
-        <div class="grid md:grid-cols-2 md:gap-20">
-          <div class="relative z-0 flex flex-row w-full group">
-            <div class="relative z-0 w-full mb-2">
-              <label
-                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
-              >
-                Mothers Name
-              </label>
-              <input
-                v-model="formData.mothersName"
-                placeholder="Mothers Name"
-                type="text"
-                onkeydown="return /[a-zA-Z]/i.test(event.key)"
-                id="base-input"
-                class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              />
-              <span
-                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
-                v-for="error of v$.mothersName.$errors"
-                :key="error.$uid"
-              >
-                {{ error.$message }}
-              </span>
-            </div>
-          </div>
-          <div class="relative z-0 flex flex-row w-full group">
-            <div class="relative z-0 w-full mb-2">
-              <label
-                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
-              >
-                Spouses Name
-              </label>
-              <input
-                v-model="formData.spouseName"
-                placeholder="Spouse Name"
-                onkeydown="return /[a-zA-Z]/i.test(event.key)"
-                type="text"
-                id="base-input"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              />
-              <span
-                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
-                v-for="error of v$.spouseName.$errors"
-                :key="error.$uid"
-              >
-                {{ error.$message }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div class="relative z-0 w-full group">
         <label
           class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
         >
-          Martial Status
+          Marital Status
         </label>
         <!-- <label class="text-sm" for="marititalStatus">Maritial Status</label> -->
 
@@ -163,7 +115,7 @@ const validate = async () => {
           >
             <input
               v-model="formData.maritalStatus"
-              :value="1"
+              value="Single"
               id="maritial-1"
               type="radio"
               name="bordered-radio1"
@@ -180,7 +132,7 @@ const validate = async () => {
           >
             <input
               v-model="formData.maritalStatus"
-              :value="2"
+              value="Married"
               id="maritial-2"
               type="radio"
               name="bordered-radio1"
@@ -197,7 +149,7 @@ const validate = async () => {
           >
             <input
               v-model="formData.maritalStatus"
-              :value="3"
+              value="Other"
               id="maritial-3"
               type="radio"
               name="bordered-radio1"
@@ -217,6 +169,61 @@ const validate = async () => {
         >
           {{ error.$message }}
         </span>
+        <div class="flex flex-col">
+          <div class="grid md:grid-cols-2 md:gap-20">
+            <div class="relative z-0 flex flex-row w-full group">
+              <div class="relative z-0 w-full mb-2">
+                <label
+                  class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                >
+                  Mothers Name
+                </label>
+                <input
+                  v-model="formData.mothersName"
+                  placeholder="Mothers Name"
+                  type="text"
+                  onkeydown="return /[a-zA-Z]/i.test(event.key)"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.mothersName.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+            </div>
+            <div
+              v-if="formData.maritalStatus == 'Married'"
+              class="relative z-0 flex flex-row w-full group"
+            >
+              <div class="relative z-0 w-full mb-2">
+                <label
+                  class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                >
+                  Spouses Name
+                </label>
+                <input
+                  v-model="formData.spouseName"
+                  placeholder="Spouse Name"
+                  onkeydown="return /[a-zA-Z]/i.test(event.key)"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <!-- <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.spouseName.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span> -->
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="grid md:grid-cols-2 md:gap-20">
           <div class="relative z-0 w-full group">
             <label
@@ -230,7 +237,7 @@ const validate = async () => {
               >
                 <input
                   v-model="formData.idType"
-                  :value="true"
+                  value="Passport"
                   id="i-1"
                   type="radio"
                   name="bordered-radio2"
@@ -247,7 +254,7 @@ const validate = async () => {
               >
                 <input
                   v-model="formData.idType"
-                  :value="false"
+                  value="National Number"
                   id="i-2"
                   type="radio"
                   name="bordered-radio2"
