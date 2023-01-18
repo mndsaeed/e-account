@@ -3,6 +3,8 @@ import TheBg from "@/components/TheBg.vue";
 import BaseCard from "@/components/BaseCard.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
 const router = useRouter();
 // const refs = ref();
 const otp2 = ref(null);
@@ -54,8 +56,9 @@ const next5 = () => {
             </div>
             <div class="flex flex-row text-sm font-medium text-gray-400">
               <p>
-                We have sent a code to your Phone +249123456789 or email
-                user@test.com
+                We have sent a code to your Phone {{ formData.mobileNumber }} or
+                email
+                {{ formData.email }}
               </p>
             </div>
           </div>
@@ -141,7 +144,6 @@ const next5 = () => {
                     <p>Didn't recieve code?</p>
                     <a
                       class="flex flex-row items-center text-blue-600"
-                      href="http://"
                       target="_blank"
                       rel="noopener noreferrer"
                       >Resend</a

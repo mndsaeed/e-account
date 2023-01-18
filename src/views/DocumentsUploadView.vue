@@ -114,7 +114,7 @@ import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
     <div
       class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
     >
-      <div class="flex justify-start items-end mt-[1.5rem] max-sm:mt-0">
+      <div class="flex justify-start items-end max-sm:mt-0">
         <router-link to="/form/cbos-form">
           <BaseButton
             :icon="mdiArrowLeft"

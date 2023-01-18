@@ -176,11 +176,11 @@ const validate = async () => {
                 <label
                   class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
                 >
-                  Mothers Name
+                  Mother's Name
                 </label>
                 <input
                   v-model="formData.mothersName"
-                  placeholder="Mothers Name"
+                  placeholder="Mother's Name"
                   type="text"
                   onkeydown="return /[a-zA-Z]/i.test(event.key)"
                   id="base-input"
@@ -413,7 +413,7 @@ const validate = async () => {
             </router-link>
           </div>
           <div
-            class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
+            class="flex gap-5 mt-[0.5rem] max-sm:justify-center max-sm:items-center max-sm:py-5"
           >
             <div class="flex items-end justify-end">
               <router-link to="/signin">

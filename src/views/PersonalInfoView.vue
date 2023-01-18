@@ -519,7 +519,7 @@ const checkForm = async () => {
       </div>
     </div>
     <div
-      class="flex flex-row justify-end gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
+      class="flex flex-row justify-end items-end align-baseline gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
     >
       <div class="flex items-end justify-end">
         <router-link to="/signin">

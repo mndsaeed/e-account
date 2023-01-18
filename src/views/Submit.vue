@@ -53,7 +53,7 @@ const router = useRouter();
 
 const rules = computed(() => {
   return {
-    terms: { required },
+    terms2: { required },
   };
 });
 const v$ = useVuelidate(rules, formData);
@@ -78,14 +78,20 @@ const validate = async () => {
     <div class="flex flex-col max-sm:px-7">
       <div class="mb-5">
         <router-link to="/Form/Personal-info">
-          <a class="font-bold text-primary text-md"> Personal Information </a>
+          <a class="font-bold text-primary text-md underline">
+            Personal Information
+          </a>
         </router-link>
         <div>
           <span class="text-sm font-semibold">Name: </span>
           <span class="text-xs"
-            >{{ formData.firstName }} {{ formData.secondName
-            }}{{ formData.thirdName }} {{ formData.fourthName }}
+            >{{ formData.firstName }} {{ formData.secondName }}
+            {{ formData.thirdName }} {{ formData.fourthName }}
           </span>
+          <div class="text-xs">
+            {{ formData.firstNameAr }} {{ formData.secondNameAr }}
+            {{ formData.thirdNameAr }} {{ formData.fourthNameAr }}
+          </div>
         </div>
         <div>
           <span class="text-sm font-semibold">Date of Birth: </span>
@@ -104,13 +110,19 @@ const validate = async () => {
           <span class="text-xs">{{ formData.resident }} </span>
         </div>
         <div>
+          <span class="text-sm font-semibold">ID Type: </span>
+          <span class="text-xs">{{ formData.idType }} </span>
+        </div>
+        <div>
           <span class="text-sm font-semibold">ID Number: </span>
           <span class="text-xs">{{ formData.idNumber }} </span>
         </div>
       </div>
       <div class="mb-5">
         <router-link to="/form/contact-info">
-          <a class="font-bold text-primary text-md">Contact Information</a>
+          <a class="font-bold text-primary text-md underline"
+            >Contact Information</a
+          >
         </router-link>
         <div>
           <span class="text-sm font-semibold">State: </span>
@@ -133,7 +145,7 @@ const validate = async () => {
           <span class="text-xs">{{ formData.poBox }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">HouseNumber: </span>
+          <span class="text-sm font-semibold">House Number: </span>
           <span class="text-xs">{{ formData.houseNumber }} </span>
         </div>
         <div>
@@ -145,13 +157,15 @@ const validate = async () => {
           <span class="text-xs">{{ formData.mobileNumber }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Preffered Branch: </span>
+          <span class="text-sm font-semibold">Preferred Branch: </span>
           <span class="text-xs">{{ formData.branch }} </span>
         </div>
       </div>
       <div class="mb-5">
         <router-link to="/form/occupation-details">
-          <a class="font-bold text-primary text-md">Occupation Details</a>
+          <a class="font-bold text-primary text-md underline"
+            >Occupation Details</a
+          >
         </router-link>
         <div>
           <span class="text-sm font-semibold">Employers Name: </span>
@@ -178,7 +192,7 @@ const validate = async () => {
         <div>
           <span class="text-sm font-semibold">Business Sector: </span>
           <span class="text-xs"
-            >{{ formData.bSector }}{{ formData.bSectorOther }}
+            >{{ formData.bSector }} {{ formData.bSectorOther }}
           </span>
         </div>
         <div>
@@ -196,35 +210,33 @@ const validate = async () => {
       </div>
       <div class="mb-5">
         <router-link to="/form/cbos-form">
-          <a class="font-bold text-primary text-md">CBOS Form</a>
+          <a class="font-bold text-primary text-md underline">CBOS Form</a>
         </router-link>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
+          <span class="text-sm font-semibold">Marital Status: </span>
           <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
+            >{{ formData.maritalStatus }}{{ formData.spouseName }}
           </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Mother's Name: </span>
+          <span class="text-xs">{{ formData.mothersName }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">ID Number: </span>
+          <span class="text-xs">{{ formData.idNumber }} </span>
         </div>
         <div>
-          <span class="text-sm font-semibold">Lorem ipsum: </span>
-          <span class="text-xs"
-            >dolor sit amet consectetur adipisicing elit. Necessitatibus maxime
-            iure illo asperiores! Esse, praesentium.
-          </span>
+          <span class="text-sm font-semibold">Date of Issue: </span>
+          <span class="text-xs">{{ formData.dateOfIssue }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">Date of Expiry: </span>
+          <span class="text-xs">{{ formData.dateOfExpiry }} </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">CBOS ID: </span>
+          <span class="text-xs">{{ formData.cbosId }} </span>
         </div>
       </div>
       <div class="">
@@ -271,7 +283,7 @@ const validate = async () => {
           </button>
           <span
             class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
-            v-for="error of v$.terms.$errors"
+            v-for="error of v$.terms2.$errors"
             :key="error.$uid"
           >
             {{ error.$message }}
