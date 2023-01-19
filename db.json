@@ -1,19 +1,13 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": "40886b59-40f5-4487-b158-7a7c23a084f6",
+      "email": "test@test.com",
+      "mobileNumber": "0111111111",
+      "password": "111111"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "53ZijMR"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

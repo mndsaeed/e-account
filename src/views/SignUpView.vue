@@ -1,6 +1,7 @@
 <script setup>
 import baseLayout from "@/layouts/baseLayout.vue";
 import useVuelidate from "@vuelidate/core";
+import axios from "axios";
 import {
   required,
   email,
@@ -68,6 +69,17 @@ const submitForm = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    try {
+      const newUser = await axios.post("http://localhost:3000/users", {
+        id: formData.id,
+        email: formData.email,
+        mobileNumber: formData.mobileNumber,
+        password: formData.password,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
     router.push("/otp");
   } else {
   }

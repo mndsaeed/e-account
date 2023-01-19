@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
+import axios from "axios";
 
 export const useUserData = defineStore("UserData", {
   state: () => ({
+    id: crypto.randomUUID(),
     firstName: "",
     secondName: "",
     thirdName: "",
@@ -49,28 +51,33 @@ export const useUserData = defineStore("UserData", {
     cheque: "",
 
     username: "",
-
   }),
   actions: {
-    async login(form){
-      try{
-        const users = await fetch(`../../loginData.json`);
-        const user = users.forEach((element) => {
-          if((form.username == element.username || form.username == element.email) && form.password == element.password){
+    async login(form) {
+      try {
+        const users = await fetch("././loginData.json");
+
+        const user = Array.from(users);
+        console.log(user);
+        user.forEach((element) => {
+          if (
+            (form.username == element.username ||
+              form.username == element.email) &&
+            form.password == element.password
+          ) {
             return element;
           }
         });
-        if(!user){
+        if (!user) {
           return false;
-        }else{
-          
-        this.username = user.username;
-        return true;
+        } else {
+          this.username = user.username;
+          return true;
         }
-      }catch(e){
+      } catch (e) {
         console.log(e);
         return false;
       }
-    }
+    },
   },
 });
