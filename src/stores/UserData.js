@@ -47,5 +47,30 @@ export const useUserData = defineStore("UserData", {
     terms2: "",
     atmCard: "",
     cheque: "",
+
+    username: "",
+
   }),
+  actions: {
+    async login(form){
+      try{
+        const users = await fetch(`../../loginData.json`);
+        const user = users.forEach((element) => {
+          if((form.username == element.username || form.username == element.email) && form.password == element.password){
+            return element;
+          }
+        });
+        if(!user){
+          return false;
+        }else{
+          
+        this.username = user.username;
+        return true;
+        }
+      }catch(e){
+        console.log(e);
+        return false;
+      }
+    }
+  },
 });

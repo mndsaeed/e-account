@@ -9,10 +9,25 @@ const formData = useUserData();
 
 const router = useRouter();
 const emailTest = "";
+
+const form = reactive(
+  {
+    username: "",
+    password: "",
+  }
+);
+
 const validate = async () => {
 
-    router.push("/signedin");
- 
+  try{
+    const loggedIn = formData.login(form);
+    if (loggedIn==true){
+      router.push("/signedin");
+    }
+    else{console.log("wrong login")}
+  }catch(e){
+    console.log(e);
+  }
 };
 </script>
 <template>
@@ -34,6 +49,7 @@ const validate = async () => {
           type="email"
           name="email"
           id="email"
+          v-model="form.username"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder="user@mail.com"
           required
@@ -50,6 +66,7 @@ const validate = async () => {
           type="password"
           name="password"
           id="password"
+          v-model="form.password"
           placeholder="••••••••"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
