@@ -55,11 +55,17 @@ export const useUserData = defineStore("UserData", {
     async login(form){
       try{
         const users = await fetch(`../../loginData.json`);
-        const user = users.forEach((element) => {
-          if((form.username == element.username || form.username == element.email) && form.password == element.password){
-            return element;
+        // const user = users.forEach((element) => {
+          
+        // });
+
+        const user = () => {
+          for(let element of users){
+            if((form.username == element.username || form.username == element.email) && form.password == element.password){
+              return element;
+            }
           }
-        });
+        };
         if(!user){
           return false;
         }else{
