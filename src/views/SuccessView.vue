@@ -11,10 +11,19 @@ import { mdiLogout } from "@mdi/js";
       <TheStepper :step="7" />
     </div>
     <div class="flex flex-col justify-center items-center mt-24 text-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="w-20 h-20">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-20 h-20"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
       </svg>
     </div>
     <div class="flex justify-center items-center">
@@ -23,9 +32,14 @@ import { mdiLogout } from "@mdi/js";
     <div class="flex justify-center items-center text-xs text-slate-700">
       Please allow 3-5 working days for feedback
     </div>
-    <div class="flex flex-col items-end mt-[12rem] mr-10">
+    <div class="flex flex-col items-end mt-[10rem] mr-10">
       <router-link to="/signIn">
-        <BaseButton :icon="mdiLogout" responsive buttonName="Sign Out" class="w-32" />
+        <BaseButton
+          :icon="mdiLogout"
+          responsive
+          buttonName="Sign Out"
+          class="w-32"
+        />
       </router-link>
     </div>
   </Form>

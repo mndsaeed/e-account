@@ -135,23 +135,40 @@ const selfieHoldingIdUpload = (event) => {
         </label>
       </div>
     </div>
-    <div class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5">
-      <div class="flex justify-start items-end mt-[4.5rem] max-sm:mt-0">
+    <div
+      class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
+    >
+      <div class="flex justify-start items-end max-sm:mt-0">
         <router-link to="/form/cbos-form">
-          <BaseButton :icon="mdiArrowLeft" responsive buttonName="Previous"
-            class="w-32 bg-indigo-900 hover:bg-indigo-800" />
+          <BaseButton
+            :icon="mdiArrowLeft"
+            responsive
+            buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800"
+          />
         </router-link>
       </div>
-      <div class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5">
+      <div
+        class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
+      >
         <div class="flex items-end justify-end">
           <router-link to="/signin">
-            <BaseButton :icon="mdiFlagCheckered" responsive buttonName="Save and Quit"
-              class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]" />
+            <BaseButton
+              :icon="mdiFlagCheckered"
+              responsive
+              buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
+            />
           </router-link>
         </div>
-        <div class="flex justify-end items-end mt-[4.5rem] max-sm:mt-0">
+        <div class="flex justify-end items-end mt-[1.5rem] max-sm:mt-0">
           <router-link to="/form/submit">
-          <BaseButton :icon="mdiArrowRight" responsive buttonName="Next" class="w-32" />
+            <BaseButton
+              :icon="mdiArrowRight"
+              responsive
+              buttonName="Next"
+              class="w-32"
+            />
           </router-link>
         </div>
       </div>

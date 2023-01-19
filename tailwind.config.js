@@ -6,7 +6,7 @@ module.exports = {
     "./node_modules/vue-tailwind-datepicker/**/*.js",
   ],
   presets: [],
-  darkMode: "media", // or 'class'
+  darkMode: "class", // or 'class'
   theme: {
     screens: {
       sm: "640px",
