@@ -403,7 +403,7 @@ const checkForm = async () => {
             </div>
             <div class="flex flex-col max-sm:flex-row max-sm:mb-5 mb-2">
               <label
-                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                class="block text-sm font-medium mb-1 text-gray-900 dark:text-white max-sm:flex-col max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mr-2"
               >
                 Residency
               </label>
