@@ -5,6 +5,7 @@ import { useUserData } from "@/stores/UserData";
 import DropDownNation from "@/components/DropDownNation.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
+import axios from "axios";
 import Form from "@/layouts/Form.vue";
 import useVuelidate from "@vuelidate/core";
 import {
@@ -30,16 +31,15 @@ const router = useRouter();
 // };
 // var data = ref(localStorage.getItem("formData"));
 
-// let maxDobDate = moment().subtract(18, 'years').format('YYYY-MM-DD'); 
+// let maxDobDate = moment().subtract(18, 'years').format('YYYY-MM-DD');
 
 // maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
 
-let maxDobDate = moment().subtract(18, 'years').format('YYYY-MM-DD'); 
+let maxDobDate = moment().subtract(18, "years").format("YYYY-MM-DD");
 
 // maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
 
 const formData = useUserData();
-
 
 // console.log("Data: ", data.value);
 const rules = computed(() => {
@@ -63,11 +63,44 @@ const rules = computed(() => {
     nationality: { required },
   };
 });
+
+//  firstName: formData.firstName,
+//           secondName: formData.secondName,
+//           thirdName: formData.thirdName,
+//           fourthName: formData.fourthName,
+//           firstNameAr: formData.firstNameAr,
+//           secondNameAr: formData.secondNameAr,
+//           thirdNameAr: formData.thirdNameAr,
+//           fourthNameAr: formData.fourthNameAr,
+//           dob: formData.dob,
+//           gender: formData.gender,
+//           resident: formData.resident,
+//           idType: formData.idType,
+//           idNumber: formData.idNumber,
 const v$ = useVuelidate(rules, formData);
 const checkForm = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    try {
+      await axios.post(`../../loginData.json`, {
+        firstName: formData.firstName,
+        secondName: formData.secondName,
+        thirdName: formData.thirdName,
+        fourthName: formData.fourthName,
+        firstNameAr: formData.firstNameAr,
+        secondNameAr: formData.secondNameAr,
+        thirdNameAr: formData.thirdNameAr,
+        fourthNameAr: formData.fourthNameAr,
+        dob: formData.dob,
+        gender: formData.gender,
+        resident: formData.resident,
+        idType: formData.idType,
+        idNumber: formData.idNumber,
+      });
+    } catch (e) {
+      console.log(e);
+    }
     router.push("/form/contact-info");
   } else {
   }

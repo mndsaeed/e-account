@@ -10,29 +10,27 @@ const formData = useUserData();
 const router = useRouter();
 const emailTest = "";
 
-const form = reactive(
-  {
-    username: "",
-    password: "",
-  }
-);
+const form = reactive({
+  username: "",
+  password: "",
+});
 
 const validate = async () => {
-
-  try{
+  try {
     const loggedIn = formData.login(form);
-    if (loggedIn==true){
+    if (loggedIn == true) {
       router.push("/signedin");
+    } else {
+      console.log("wrong login");
     }
-    else{console.log("wrong login")}
-  }catch(e){
+  } catch (e) {
     console.log(e);
   }
 };
 </script>
 <template>
   <baseLayout>
-    <form @submit.prevent="validate" class="space-y-6" action="#">
+    <form @submit.prevent="validate" class="space-y-6">
       <h5
         class="inline-block text-xl font-medium text-center text-gray-300 dark:text-white"
       >
@@ -77,7 +75,6 @@ const validate = async () => {
       <div class="flex flex-col justify-start">
         <router-link to="/">
           <a
-            href="#"
             class="mr-auto text-sm text-right text-blue-500 underline dark:text-blue-500"
             >Sign Up</a
           >

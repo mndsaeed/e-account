@@ -61,6 +61,7 @@ const validate = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    formData.submitted = true;
     router.push("/form/success");
     // alert("valid");
   } else {

@@ -3,6 +3,11 @@ import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
 import Form from "../layouts/Form.vue";
 import { mdiLogout } from "@mdi/js";
+import { useUserData } from "@/stores/UserData";
+const formData = useUserData();
+const date = new Date();
+date.setDate(date.getDate() + 5);
+const date1 = date.toLocaleDateString();
 </script>
 
 <template>
@@ -30,7 +35,8 @@ import { mdiLogout } from "@mdi/js";
       Application Submitted Successfully
     </div>
     <div class="flex justify-center items-center text-xs text-slate-700">
-      Please allow 3-5 working days for feedback
+      Please visit {{ formData.branch }} branch to provide your signiture on
+      {{ date1 }}
     </div>
     <div class="flex flex-col items-end mt-[10rem] mr-10">
       <router-link to="/signIn">
