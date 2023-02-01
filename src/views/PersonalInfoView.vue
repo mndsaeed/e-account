@@ -38,7 +38,9 @@ const router = useRouter();
 let maxDobDate = moment().subtract(18, "years").format("YYYY-MM-DD");
 
 // maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
-
+onMounted(() => {
+  formData.loadForm();
+});
 const formData = useUserData();
 
 // console.log("Data: ", data.value);
@@ -64,45 +66,44 @@ const rules = computed(() => {
   };
 });
 
-//  firstName: formData.firstName,
-//           secondName: formData.secondName,
-//           thirdName: formData.thirdName,
-//           fourthName: formData.fourthName,
-//           firstNameAr: formData.firstNameAr,
-//           secondNameAr: formData.secondNameAr,
-//           thirdNameAr: formData.thirdNameAr,
-//           fourthNameAr: formData.fourthNameAr,
-//           dob: formData.dob,
-//           gender: formData.gender,
-//           resident: formData.resident,
-//           idType: formData.idType,
-//           idNumber: formData.idNumber,
 const v$ = useVuelidate(rules, formData);
 const checkForm = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
-    try {
-      await axios.post(`../../loginData.json`, {
-        firstName: formData.firstName,
-        secondName: formData.secondName,
-        thirdName: formData.thirdName,
-        fourthName: formData.fourthName,
-        firstNameAr: formData.firstNameAr,
-        secondNameAr: formData.secondNameAr,
-        thirdNameAr: formData.thirdNameAr,
-        fourthNameAr: formData.fourthNameAr,
-        dob: formData.dob,
-        gender: formData.gender,
-        resident: formData.resident,
-        idType: formData.idType,
-        idNumber: formData.idNumber,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    // formData.pageNumber = 2;
+    formData.pageUrl = "/form/personal-info";
+    formData.saveForm();
+
     router.push("/form/contact-info");
   } else {
+  }
+};
+const quit = async () => {
+  formData.saveForm();
+  router.push("/signin");
+};
+
+var count = 1;
+const showExtra = ref();
+const showExtra2 = ref();
+
+const addRow = () => {
+  if (count == 1) {
+    showExtra.value = "show";
+  }
+  if (count == 2) {
+    showExtra2.value = "show";
+  }
+  count = 2;
+};
+const removeRow = () => {
+  if (count == 1) {
+    showExtra.value = "";
+  }
+  if (count == 2) {
+    showExtra2.value = "";
+    count = 1;
   }
 };
 </script>
@@ -314,7 +315,6 @@ const checkForm = async () => {
                 required
                 v-model="formData.dob"
                 placeholder="Date of Birth"
-                type="date"
                 :max="maxDobDate"
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
@@ -531,6 +531,166 @@ const checkForm = async () => {
               </span>
             </div>
           </div>
+          <!-- <div v-if="formData.accountType == 'Current'">
+            <div class="flex justify-end items-center mt-2">
+              <button @click.prevent="addRow" class="w-6 flex">
+                <img src="../assets/plusButton.svg" alt="" />
+              </button>
+              <button @click.prevent="removeRow" class="w-6 flex ml-2">
+                <img src="../assets/minusButton.svg" alt="" />
+              </button>
+            </div>
+            <div class="grid grid-cols-2 gap-20 mb-2">
+              <div>
+                <label
+                  class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                >
+                  Name of Reference
+                </label>
+                <input
+                  required
+                  v-model="formData.refereneName"
+                  placeholder="Name of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+              <div>
+                <div class="flex flex-row">
+                  <label
+                    class="flex text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                  >
+                    Address of Reference
+                  </label>
+                </div>
+                <div class=""></div>
+                <input
+                  required
+                  v-model="formData.refereneAddress"
+                  placeholder="Address of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+            </div>
+            <div
+              v-if="showExtra == 'show'"
+              class="grid grid-cols-2 gap-20 mb-2"
+            >
+              <div>
+                <label
+                  class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                >
+                  Name of Reference
+                </label>
+                <input
+                  required
+                  v-model="formData.refereneName"
+                  placeholder="Name of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+              <div>
+                <div class="flex flex-row">
+                  <label
+                    class="flex text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                  >
+                    Address of Reference
+                  </label>
+                </div>
+                <div class=""></div>
+                <input
+                  required
+                  v-model="formData.refereneAddress"
+                  placeholder="Address of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+            </div>
+            <div v-if="showExtra2 == 'show'" class="grid grid-cols-2 gap-20">
+              <div>
+                <label
+                  class="block text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                >
+                  Name of Reference
+                </label>
+                <input
+                  required
+                  v-model="formData.refereneName"
+                  placeholder="Name of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+              <div>
+                <div class="flex flex-row">
+                  <label
+                    class="flex text-sm font-medium mb-1 text-gray-900 dark:text-white"
+                  >
+                    Address of Reference
+                  </label>
+                </div>
+                <div class=""></div>
+                <input
+                  required
+                  v-model="formData.refereneAddress"
+                  placeholder="Address of Reference"
+                  type="text"
+                  id="base-input"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.idNumber.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
+              </div>
+            </div>
+          </div> -->
         </form>
       </div>
     </div>
@@ -538,15 +698,13 @@ const checkForm = async () => {
       class="flex flex-row justify-end items-end align-baseline gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
     >
       <div class="flex items-end justify-end">
-        <router-link to="/signin">
-          <BaseButton
-            @click="checkForm"
-            buttonName="Save and Quit"
-            class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
-          />
-        </router-link>
+        <BaseButton
+          @click="quit"
+          buttonName="Save and Quit"
+          class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
+        />
       </div>
-      <div class="flex items-end justify-end mt-2 max-sm:mt-0">
+      <div class="flex items-end justify-end max-sm:mt-0">
         <!-- <router-link to="/form/contact-info"> -->
         <BaseButton @click="checkForm" buttonName="Next" class="w-32" />
         <!-- </router-link> -->

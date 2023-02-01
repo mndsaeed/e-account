@@ -65,17 +65,36 @@ const rules = computed(() => {
     salary: { required },
   };
 });
+onMounted(() => {
+  formData.loadForm();
+});
 const v$ = useVuelidate(rules, formData);
 const validate = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    // formData.pageNumber = 4;
+    formData.pageUrl = "/form/Cbos-form";
+    formData.saveForm();
+
     router.push("/form/Cbos-form");
     // alert("valid");
   } else {
     // alert("invalid");
   }
 };
+const previous = async () => {
+  formData.pageUrl = "/form/contact-info";
+  formData.saveForm();
+  router.push("/form/contact-info");
+};
+const quit = async () => {
+  formData.saveForm();
+  router.push("/signin");
+};
+// window.onbeforeunload = function () {
+//   return "Unsaved data will be lost if you leave the page, are you sure?";
+// };
 </script>
 
 <template>
@@ -319,27 +338,25 @@ const validate = async () => {
           class="flex flex-row justify-between mt-[3.5rem] gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
         >
           <div class="flex justify-start items-end max-sm:mt-0">
-            <router-link to="/form/contact-info">
-              <BaseButton
-                :icon="mdiArrowLeft"
-                responsive
-                buttonName="Previous"
-                class="w-32 bg-indigo-900 hover:bg-indigo-800"
-              />
-            </router-link>
+            <BaseButton
+              @click="previous"
+              :icon="mdiArrowLeft"
+              responsive
+              buttonName="Previous"
+              class="w-32 bg-indigo-900 hover:bg-indigo-800"
+            />
           </div>
           <div
             class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
           >
             <div class="flex items-end justify-end">
-              <router-link to="/signin">
-                <BaseButton
-                  :icon="mdiFlagCheckered"
-                  responsive
-                  buttonName="Save and Quit"
-                  class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
-                />
-              </router-link>
+              <BaseButton
+                @click="quit"
+                :icon="mdiFlagCheckered"
+                responsive
+                buttonName="Save and Quit"
+                class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
+              />
             </div>
             <div class="flex justify-end items-end mt-[3surem] max-sm:mt-0">
               <!-- <router-link to="/form/occupation-details"> -->

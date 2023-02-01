@@ -64,16 +64,32 @@ const rules = computed(() => {
     },
   };
 });
+onMounted(() => {
+  formData.loadForm();
+});
 const v$ = useVuelidate(rules, formData);
 const validate = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    // formData.pageNumber = 3;
+    formData.pageUrl = "/form/occupation-details";
+    formData.saveForm();
+
     router.push("/form/occupation-details");
     // alert("valid");
   } else {
     // alert("invalid");
   }
+};
+const previous = async () => {
+  formData.pageUrl = "/form/personal-info";
+  formData.saveForm();
+  router.push("/form/personal-info");
+};
+const quit = async () => {
+  formData.saveForm();
+  router.push("/signin");
 };
 </script>
 
@@ -285,27 +301,25 @@ const validate = async () => {
         class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
       >
         <div class="flex justify-start items-end max-sm:mt-0">
-          <router-link to="/form/personal-info">
-            <BaseButton
-              :icon="mdiArrowLeft"
-              responsive
-              buttonName="Previous"
-              class="w-32 bg-indigo-900 hover:bg-indigo-800"
-            />
-          </router-link>
+          <BaseButton
+            :icon="mdiArrowLeft"
+            responsive
+            @click="previous"
+            buttonName="Previous"
+            class="w-32 bg-indigo-900 hover:bg-indigo-800"
+          />
         </div>
         <div
           class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
         >
           <div class="flex items-end justify-end">
-            <router-link to="/signin">
-              <BaseButton
-                :icon="mdiFlagCheckered"
-                responsive
-                buttonName="Save and Quit"
-                class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
-              />
-            </router-link>
+            <BaseButton
+              @click="quit"
+              :icon="mdiFlagCheckered"
+              responsive
+              buttonName="Save and Quit"
+              class="w-32 bg-red-600 hover:bg-red-700 max-sm:text-xs max-sm:h-[2.5rem]"
+            />
           </div>
           <div class="flex justify-end items-end max-sm:mt-0">
             <!-- <router-link to="/form/occupation-details"> -->

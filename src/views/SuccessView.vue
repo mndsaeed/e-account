@@ -4,10 +4,14 @@ import TheStepper from "@/components/TheStepper.vue";
 import Form from "../layouts/Form.vue";
 import { mdiLogout } from "@mdi/js";
 import { useUserData } from "@/stores/UserData";
+import { ref, onMounted } from "vue";
 const formData = useUserData();
 const date = new Date();
 date.setDate(date.getDate() + 5);
 const date1 = date.toLocaleDateString();
+onMounted(() => {
+  formData.loadForm();
+});
 </script>
 
 <template>

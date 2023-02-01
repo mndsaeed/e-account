@@ -8,23 +8,17 @@ import { useUserData } from "@/stores/UserData";
 const formData = useUserData();
 
 const router = useRouter();
-const emailTest = "";
 
-const form = reactive({
-  username: "",
-  password: "",
-});
-
+const userDoesNotExists = ref("");
 const validate = async () => {
-  try {
-    const loggedIn = formData.login(form);
-    if (loggedIn == true) {
+  if (await formData.signIn()) {
+    if (formData.submitted) {
       router.push("/signedin");
     } else {
-      console.log("wrong login");
+      router.push(formData.pageUrl);
     }
-  } catch (e) {
-    console.log(e);
+  } else {
+    userDoesNotExists.value = true;
   }
 };
 </script>
@@ -47,7 +41,7 @@ const validate = async () => {
           type="email"
           name="email"
           id="email"
-          v-model="form.username"
+          v-model="formData.email"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder="user@mail.com"
           required
@@ -64,7 +58,6 @@ const validate = async () => {
           type="password"
           name="password"
           id="password"
-          v-model="form.password"
           placeholder="••••••••"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
@@ -87,6 +80,12 @@ const validate = async () => {
       >
         Sign In
       </button>
+      <div
+        v-if="userDoesNotExists"
+        class="text-md text-center font-semibold text-red-600 dark:text-red-400"
+      >
+        User Does Not Exists
+      </div>
     </form>
     <!-- </div> -->
     <!-- </div> -->

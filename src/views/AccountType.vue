@@ -34,6 +34,7 @@ const validate = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
+    formData.saveForm();
     router.push("/form/personal-info");
   } else {
   }

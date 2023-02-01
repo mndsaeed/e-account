@@ -1,7 +1,7 @@
 <script setup>
 import TheBg from "@/components/TheBg.vue";
 import BaseCard from "@/components/BaseCard.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserData } from "@/stores/UserData";
 const formData = useUserData();
@@ -11,8 +11,11 @@ const otp2 = ref(null);
 const otp3 = ref(null);
 const otp4 = ref(null);
 const submit = ref(null);
-
+onMounted(() => {
+  formData.loadForm();
+});
 const checkForm = async () => {
+  formData.pageNumber = 1;
   await router.push("/account-type");
 };
 

@@ -10,10 +10,11 @@ import {
   helpers,
   maxLength,
 } from "@vuelidate/validators";
-import { reactive, computed, watch, onMounted } from "vue";
+import { reactive, computed, watch, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import { useUserData } from "@/stores/UserData";
+const signup = import.meta.env.VITE_CREATE_ACCOUNT;
 const formData = useUserData();
 
 // const formData = reactive({
@@ -62,26 +63,17 @@ const rules = computed(() => {
     },
   };
 });
-
+const userExists = ref("");
 const v$ = useVuelidate(rules, formData);
-
 const submitForm = async () => {
   const result = await v$.value.$validate();
 
   if (result) {
-    try {
-      const newUser = await axios.post("http://localhost:3000/users", {
-        id: formData.id,
-        email: formData.email,
-        mobileNumber: formData.mobileNumber,
-        password: formData.password,
-      });
-    } catch (e) {
-      console.log(e);
+    if (await formData.signup()) {
+      router.push("/otp");
+    } else {
+      userExists.value = true;
     }
-
-    router.push("/otp");
-  } else {
   }
 };
 </script>
@@ -203,6 +195,12 @@ const submitForm = async () => {
         >
           Sign Up
         </button>
+      </div>
+      <div
+        v-if="userExists"
+        class="text-md text-center font-semibold text-red-600 dark:text-red-400"
+      >
+        User Already Exists
       </div>
     </form>
     <!-- </div> -->
