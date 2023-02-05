@@ -67,6 +67,7 @@ const rules = computed(() => {
 onMounted(() => {
   formData.loadForm();
 });
+const tryAgain = ref();
 const v$ = useVuelidate(rules, formData);
 const validate = async () => {
   const result = await v$.value.$validate();
@@ -74,9 +75,11 @@ const validate = async () => {
   if (result) {
     // formData.pageNumber = 3;
     formData.pageUrl = "/form/occupation-details";
-    formData.saveForm();
-
-    router.push("/form/occupation-details");
+    if (await formData.saveForm()) {
+      router.push("/form/occupation-details");
+    } else {
+      tryAgain.value = true;
+    }
     // alert("valid");
   } else {
     // alert("invalid");
@@ -312,6 +315,9 @@ const quit = async () => {
         <div
           class="flex gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
         >
+          <div v-if="tryAgain == true" class="text-red-600 mb-2">
+            An error has occurred please try again later
+          </div>
           <div class="flex items-end justify-end">
             <BaseButton
               @click="quit"

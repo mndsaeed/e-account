@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import axios from "axios";
+import { mdiConsoleNetwork } from "@mdi/js";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 axios.defaults.baseURL = baseUrl;
 export const useUserData = defineStore("UserData", {
@@ -58,8 +59,14 @@ export const useUserData = defineStore("UserData", {
     pageUrl: "",
     submitDate: "",
     personalPhoto: ref(),
-    idPhotoPhoto: ref(),
-    selfieHoldingIdPhoto: ref(),
+    idPhoto: ref(),
+    selfieHoldingId: ref(),
+    images: {},
+    personalCheck: ref("Click to upload"),
+    idCheck: ref("Click to upload"),
+    selfieCheck: ref("Click to upload"),
+    fileToo: false,
+    fileFormat: false,
   }),
 
   actions: {
@@ -86,7 +93,7 @@ export const useUserData = defineStore("UserData", {
         const User = await axios.post("/signin", {
           username: this.email,
         });
-
+        this.pageUrl = User.data.body.account_info_from.pageUrl;
         const id = User.data.body.account_id;
         localStorage.setItem("id", id);
         if (User.data.code == 0) {
@@ -153,18 +160,113 @@ export const useUserData = defineStore("UserData", {
           submitDate: this.submitDate,
           accountType: this.accountType,
         });
+        if (form.data.code == 0) {
+          return true;
+        } else {
+          return false;
+        }
       } catch (e) {
         console.log(e);
       }
     },
-    async upload() {
+    async upload(image, description) {
+      const id = localStorage.getItem("id");
+      const data = { userId: id, type: "photo", description: description };
+      const formImage = new FormData();
+      const theImage = image;
+      const blob = new Blob([JSON.stringify(data)], {
+        type: "application/json",
+      });
+      formImage.append("image", theImage);
+      formImage.append("data", blob);
       try {
-        const id = localStorage.getItem("id");
-
-        const form = await axios.post("/documents/newDocument" + id, {
-          image: FormData.idPhoto,
-          data: { userId: id, type: "photo", description: "description" },
-        });
+        if (id == null) {
+          return false;
+        }
+        const documents = await axios.post(
+          "/documents/newDocument",
+          formImage,
+          {
+            Headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
+        );
+        if (description == "personalPhoto") {
+          if (documents.data.code == -600) {
+            console.log("File too large");
+            this.fileToo = true;
+            console.log(this.fileToo);
+          }
+          if (documents.data.code == -601) {
+            console.log("File wrong format");
+            this.fileFormat = true;
+          }
+          if (documents.data.code == 0) {
+            this.fileFormat = false;
+            this.fileToo = false;
+            return true;
+          }
+        }
+        if (description == "idPhoto") {
+          if (documents.data.code == -600) {
+            console.log("File too large");
+            this.fileToo = true;
+          }
+          if (documents.data.code == -601) {
+            console.log("File wrong format");
+            this.fileFormat = true;
+          }
+          if (documents.data.code == 0) {
+            this.fileFormat = false;
+            this.fileToo = false;
+            return true;
+          }
+        }
+        if (description == "selfieHoldingId") {
+          if (documents.data.code == -600) {
+            console.log("File too large");
+            this.fileToo = true;
+          }
+          if (documents.data.code == -601) {
+            console.log("File wrong format");
+            this.fileFormat = true;
+          }
+          if (documents.data.code == 0) {
+            this.fileFormat = false;
+            this.fileToo = false;
+            return true;
+          }
+        }
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
+    async download() {
+      const id = localStorage.getItem("id");
+      try {
+        const form = await axios.get("/documents/user/" + id, {});
+        this.images = form.data.body;
+        const imageObj = this.images;
+        const iterator = imageObj.values();
+        for (const value of iterator) {
+          if (value.description == "personalPhoto") {
+            this.personalCheck = value.description;
+            this.personalPhoto = value.file;
+            console.log(this.personalCheck);
+          }
+          if (value.description == "idPhoto") {
+            this.idCheck = value.description;
+            this.idPhoto = value.file;
+            console.log(this.idCheck);
+          }
+          if (value.description == "selfieHoldingId") {
+            this.selfieCheck = value.description;
+            this.selfieHoldingId = value.file;
+            console.log(this.selfieCheck);
+          }
+        }
       } catch (e) {
         console.log(e);
       }
@@ -255,7 +357,7 @@ export const useUserData = defineStore("UserData", {
         this.branch = form.data.body.branch;
         this.employersName = form.data.body.employersName;
         this.department = form.data.body.department;
-        this.bArea = form.data.body.barea;
+        this.bArea = form.data.body.bArea;
         this.phoneNumber = form.data.body.phoneNumber;
         this.bType = form.data.body.bType;
         this.bSector = form.data.body.bSector;

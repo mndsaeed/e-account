@@ -65,7 +65,7 @@ const rules = computed(() => {
     nationality: { required },
   };
 });
-
+const tryAgain = ref();
 const v$ = useVuelidate(rules, formData);
 const checkForm = async () => {
   const result = await v$.value.$validate();
@@ -73,9 +73,11 @@ const checkForm = async () => {
   if (result) {
     // formData.pageNumber = 2;
     formData.pageUrl = "/form/personal-info";
-    formData.saveForm();
-
-    router.push("/form/contact-info");
+    if (await formData.saveForm()) {
+      router.push("/form/contact-info");
+    } else {
+      tryAgain.value = true;
+    }
   } else {
   }
 };
@@ -697,6 +699,9 @@ const removeRow = () => {
     <div
       class="flex flex-row justify-end items-end align-baseline gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"
     >
+      <div v-if="tryAgain == true" class="text-red-600 mb-2">
+        An error has occurred please try again later
+      </div>
       <div class="flex items-end justify-end">
         <BaseButton
           @click="quit"

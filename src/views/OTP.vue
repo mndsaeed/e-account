@@ -15,7 +15,7 @@ onMounted(() => {
   formData.loadForm();
 });
 const checkForm = async () => {
-  formData.pageNumber = 1;
+  formData.pageUrl = "/account-type";
   await router.push("/account-type");
 };
 

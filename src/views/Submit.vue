@@ -59,6 +59,7 @@ const rules = computed(() => {
 onMounted(() => {
   formData.loadForm();
 });
+const tryAgain = ref();
 const v$ = useVuelidate(rules, formData);
 const validate = async () => {
   const result = await v$.value.$validate();
@@ -69,9 +70,12 @@ const validate = async () => {
     formData.submitDate = date.toLocaleDateString();
 
     formData.submitted = true;
-    formData.submitForm();
+    if (await formData.submitForm()) {
+      router.push("/form/success");
+    } else {
+      tryAgain.value = true;
+    }
 
-    router.push("/form/success");
     // alert("valid");
   } else {
     // alert("invalid");

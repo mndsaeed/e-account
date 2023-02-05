@@ -3,49 +3,84 @@ import BaseButton from "@/components/BaseButton.vue";
 import TheStepper from "@/components/TheStepper.vue";
 import Form from "@/layouts/Form.vue";
 import { mdiArrowRight, mdiFlagCheckered, mdiArrowLeft } from "@mdi/js";
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useUserData } from "@/stores/UserData";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
+const rules = computed(() => {
+  return {
+    personalPhoto: { required },
+    idPhoto: { required },
+    selfieHoldingId: { required },
+  };
+});
+const errorFormat = ref("");
+const errorSize = ref("");
+const errorFormat1 = ref("");
+const errorSize1 = ref("");
+const errorFormat2 = ref("");
+const errorSize2 = ref("");
+const tryAgain = ref();
 const formData = useUserData();
 const router = useRouter();
 const personalPhoto = ref("Click to upload");
-const personalPhotoUpload = (event) => {
+const personalPhotoUpload = async (event) => {
   event.preventDefault();
-  personalPhoto.value = event.target.files[0].name;
+
   formData.personalPhoto = event.target.files[0];
-
-  console.log(formData.personalPhoto);
-  try {
-    const id = localStorage.getItem("id");
-
-    const form = axios.post("/documents/newDocument", {
-      image: formData.personalPhoto,
-      data: { userId: id, type: "photo", description: "description" },
-    });
-  } catch (e) {
-    console.log(e);
+  if (await formData.upload(formData.personalPhoto, "personalPhoto")) {
+    personalPhoto.value = event.target.files[0].name;
+    tryAgain.value = false;
+  } else {
+    tryAgain.value = true;
   }
+  errorFormat.value = formData.fileFormat;
+  errorSize.value = formData.fileToo;
 };
 
 const idPhoto = ref("Click to upload");
-const idPhotoUpload = (event) => {
+const idPhotoUpload = async (event) => {
   event.preventDefault();
-  idPhoto.value = event.target.files[0].name;
+
   formData.idPhoto = event.target.files[0];
+  if (await formData.upload(formData.idPhoto, "idPhoto")) {
+    idPhoto.value = event.target.files[0].name;
+    tryAgain.value = false;
+  } else {
+    tryAgain.value = true;
+  }
+  errorFormat1.value = formData.fileFormat;
+  errorSize1.value = formData.fileToo;
 };
 
 const selfieHoldingId = ref("Click to upload");
-const selfieHoldingIdUpload = (event) => {
+const selfieHoldingIdUpload = async (event) => {
   event.preventDefault();
-  selfieHoldingId.value = event.target.files[0].name;
-  formData.selfieHoldingId = event.target.files[0];
-};
 
+  formData.selfieHoldingId = event.target.files[0];
+  if (await formData.upload(formData.selfieHoldingId, "selfieHoldingId")) {
+    selfieHoldingId.value = event.target.files[0].name;
+    tryAgain.value = false;
+  } else {
+    tryAgain.value = true;
+  }
+  errorFormat2.value = formData.fileFormat;
+  errorSize2.value = formData.fileToo;
+};
+const v$ = useVuelidate(rules, formData);
 const validate = async () => {
-  formData.pageUrl = "/form/submit";
-  router.push("/form/submit");
+  const result = await v$.value.$validate();
+  if (result) {
+    formData.pageUrl = "/form/submit";
+    if (tryAgain.value !== true) {
+      router.push("/form/submit");
+    }
+  } else {
+    console.log("validate");
+  }
 };
 const previous = async () => {
   formData.pageUrl = "/form/cbos-form";
@@ -56,6 +91,12 @@ const quit = async () => {
   formData.saveForm();
   router.push("/signin");
 };
+onMounted(async () => {
+  await formData.download();
+  personalPhoto.value = formData.personalCheck;
+  idPhoto.value = formData.idCheck;
+  selfieHoldingId.value = formData.selfieCheck;
+});
 </script>
 
 <template>
@@ -121,8 +162,22 @@ const quit = async () => {
               <span class="text-sm font-semibold">{{ personalPhoto }}</span>
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400"></p>
+            <div v-if="errorSize == true" class="text-red-600 mb-2 flex">
+              File is too Large
+            </div>
+            <div v-if="errorFormat == true" class="text-red-600 mb-2 flex">
+              Wrong file format
+            </div>
           </div>
+          <span
+            class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+            v-for="error of v$.personalPhoto.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </span>
           <input
+            required
             id="dropzone-file1"
             v-on:change="personalPhotoUpload"
             type="file"
@@ -130,6 +185,7 @@ const quit = async () => {
           />
         </label>
       </div>
+
       <div class="flex items-center justify-center w-full">
         <label
           for="dropzone-file2"
@@ -183,7 +239,21 @@ const quit = async () => {
               PNG or JPG (MAX. 3.5 MB)
             </p>
           </div>
+          <div v-if="errorSize1 == true" class="text-red-600 mb-2 flex">
+            File is too Large
+          </div>
+          <div v-if="errorFormat1 == true" class="text-red-600 mb-2 flex">
+            Wrong file format
+          </div>
+          <span
+            class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+            v-for="error of v$.idPhoto.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </span>
           <input
+            required
             id="dropzone-file2"
             v-on:change="idPhotoUpload"
             type="file"
@@ -244,7 +314,21 @@ const quit = async () => {
               PNG or JPG (MAX. 3.5 MB)
             </p>
           </div>
+          <div v-if="errorSize2 == true" class="text-red-600 mb-2 flex">
+            File is too Large
+          </div>
+          <div v-if="errorFormat2 == true" class="text-red-600 mb-2 flex">
+            Wrong file format
+          </div>
+          <span
+            class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+            v-for="error of v$.selfieHoldingId.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </span>
           <input
+            required
             id="dropzone-file3"
             v-on:change="selfieHoldingIdUpload"
             type="file"
@@ -252,6 +336,9 @@ const quit = async () => {
           />
         </label>
       </div>
+    </div>
+    <div v-if="tryAgain == true" class="text-red-600 mb-2">
+      An error has occurred please try again later
     </div>
     <div
       class="flex flex-row justify-between gap-5 max-sm:justify-center max-sm:items-center max-sm:py-5"

@@ -8,12 +8,15 @@ import { useUserData } from "@/stores/UserData";
 const formData = useUserData();
 
 const router = useRouter();
-
+const tryAgain = ref();
 const userDoesNotExists = ref("");
 const validate = async () => {
   if (await formData.signIn()) {
     if (formData.submitted) {
       router.push("/signedin");
+      console.log("submitted");
+    } else if ((await formData.pageUrl) == "") {
+      router.push("/otp");
     } else {
       router.push(formData.pageUrl);
     }
