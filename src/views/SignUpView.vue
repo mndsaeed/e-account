@@ -9,6 +9,7 @@ import {
   sameAs,
   helpers,
   maxLength,
+  numeric,
 } from "@vuelidate/validators";
 import { reactive, computed, watch, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -48,6 +49,7 @@ const rules = computed(() => {
       required: helpers.withMessage("Please enter your phone", required),
       minLength: minLength(10),
       maxLength: maxLength(10),
+      numeric,
     },
     password: {
       required: helpers.withMessage("Please enter your password", required),
@@ -130,7 +132,7 @@ const submitForm = async () => {
           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
         />
         <span
-          class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+          class="mt-2 mr-2 text-xs font-semibold text-red-600 dark:text-red-400"
           v-for="error of v$.mobileNumber.$errors"
           :key="error.$uid"
         >
@@ -145,6 +147,7 @@ const submitForm = async () => {
         >
         <input
           type="password"
+          v-model="formData.password"
           id="password"
           placeholder="••••••••"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -165,6 +168,7 @@ const submitForm = async () => {
         >
         <input
           type="password"
+          v-model="formData.confirmPassword"
           id="confirmPassword"
           placeholder="••••••••"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"

@@ -67,6 +67,7 @@ export const useUserData = defineStore("UserData", {
     selfieCheck: ref("Click to upload"),
     fileToo: false,
     fileFormat: false,
+    tryAgin: ref(),
   }),
 
   actions: {
@@ -84,6 +85,7 @@ export const useUserData = defineStore("UserData", {
           return false;
         }
       } catch (e) {
+        this.tryAgin = true;
         console.log(e);
       }
     },
@@ -169,9 +171,9 @@ export const useUserData = defineStore("UserData", {
         console.log(e);
       }
     },
-    async upload(image, description) {
+    async upload(image, type, description) {
       const id = localStorage.getItem("id");
-      const data = { userId: id, type: "photo", description: description };
+      const data = { userId: id, type: type, description: description };
       const formImage = new FormData();
       const theImage = image;
       const blob = new Blob([JSON.stringify(data)], {
@@ -323,7 +325,9 @@ export const useUserData = defineStore("UserData", {
           submitDate: this.submitDate,
           accountType: this.accountType,
         });
+        return true;
       } catch (e) {
+        return false;
         console.log(e);
       }
     },

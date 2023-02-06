@@ -31,14 +31,19 @@ const personalPhotoUpload = async (event) => {
   event.preventDefault();
 
   formData.personalPhoto = event.target.files[0];
-  if (await formData.upload(formData.personalPhoto, "personalPhoto")) {
-    personalPhoto.value = event.target.files[0].name;
-    tryAgain.value = false;
-  } else {
-    tryAgain.value = true;
+  const files = event.target.files;
+  for (const file of files) {
+    if (
+      await formData.upload(formData.personalPhoto, file.type, "personalPhoto")
+    ) {
+      personalPhoto.value = event.target.files[0].name;
+      tryAgain.value = false;
+    } else {
+      tryAgain.value = true;
+    }
+    errorFormat.value = formData.fileFormat;
+    errorSize.value = formData.fileToo;
   }
-  errorFormat.value = formData.fileFormat;
-  errorSize.value = formData.fileToo;
 };
 
 const idPhoto = ref("Click to upload");
@@ -46,14 +51,17 @@ const idPhotoUpload = async (event) => {
   event.preventDefault();
 
   formData.idPhoto = event.target.files[0];
-  if (await formData.upload(formData.idPhoto, "idPhoto")) {
-    idPhoto.value = event.target.files[0].name;
-    tryAgain.value = false;
-  } else {
-    tryAgain.value = true;
+  const files = event.target.files;
+  for (const file of files) {
+    if (await formData.upload(formData.idPhoto, file.type, "idPhoto")) {
+      idPhoto.value = event.target.files[0].name;
+      tryAgain.value = false;
+    } else {
+      tryAgain.value = true;
+    }
+    errorFormat1.value = formData.fileFormat;
+    errorSize1.value = formData.fileToo;
   }
-  errorFormat1.value = formData.fileFormat;
-  errorSize1.value = formData.fileToo;
 };
 
 const selfieHoldingId = ref("Click to upload");
@@ -61,14 +69,23 @@ const selfieHoldingIdUpload = async (event) => {
   event.preventDefault();
 
   formData.selfieHoldingId = event.target.files[0];
-  if (await formData.upload(formData.selfieHoldingId, "selfieHoldingId")) {
-    selfieHoldingId.value = event.target.files[0].name;
-    tryAgain.value = false;
-  } else {
-    tryAgain.value = true;
+  const files = event.target.files;
+  for (const file of files) {
+    if (
+      await formData.upload(
+        formData.selfieHoldingId,
+        file.type,
+        "selfieHoldingId"
+      )
+    ) {
+      selfieHoldingId.value = event.target.files[0].name;
+      tryAgain.value = false;
+    } else {
+      tryAgain.value = true;
+    }
+    errorFormat2.value = formData.fileFormat;
+    errorSize2.value = formData.fileToo;
   }
-  errorFormat2.value = formData.fileFormat;
-  errorSize2.value = formData.fileToo;
 };
 const v$ = useVuelidate(rules, formData);
 const validate = async () => {

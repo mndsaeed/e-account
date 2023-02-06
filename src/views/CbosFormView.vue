@@ -205,7 +205,6 @@ const quit = async () => {
                   v-model="formData.mothersName"
                   placeholder="Mother's Name"
                   type="text"
-                  onkeydown="return /[a-zA-Z]/i.test(event.key)"
                   id="base-input"
                   class="bg-gray-50 border border-gray-300 max-sm:w-full text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />

@@ -128,7 +128,6 @@ const removeRow = () => {
                   required
                   v-model="formData.firstName"
                   placeholder="First Name"
-                  onkeydown="return /[a-z]/i.test(event.key)"
                   type="text"
                   id="firstName"
                   class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -151,7 +150,6 @@ const removeRow = () => {
                 <input
                   required
                   v-model="formData.secondName"
-                  onkeydown="return /[a-z]/i.test(event.key)"
                   placeholder="Second Name"
                   type="text"
                   id="base-input"
@@ -175,7 +173,6 @@ const removeRow = () => {
                 <input
                   required
                   v-model="formData.thirdName"
-                  onkeydown="return /[a-z]/i.test(event.key)"
                   placeholder="Third Name"
                   type="text"
                   id="base-input"
@@ -199,7 +196,6 @@ const removeRow = () => {
                 <input
                   required
                   v-model="formData.fourthName"
-                  onkeydown="return /[a-z]/i.test(event.key)"
                   placeholder="Fourth Name"
                   type="text"
                   id="base-input"
@@ -318,6 +314,7 @@ const removeRow = () => {
                 v-model="formData.dob"
                 placeholder="Date of Birth"
                 :max="maxDobDate"
+                type="date"
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
                 id="base-input"
