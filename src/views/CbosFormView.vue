@@ -22,6 +22,7 @@ import {
   required,
   email,
   minLength,
+  minValue,
   sameAs,
   helpers,
 } from "@vuelidate/validators";
@@ -69,6 +70,13 @@ const router = useRouter();
 //   }
 // });
 
+function FutureDate(value) {
+  return value && moment(value).isAfter(moment().startOf("day"));
+}
+function PastDate(value) {
+  return value && moment(value).isBefore(moment().startOf("day"));
+}
+
 const rules = computed(() => {
   return {
     mothersName: { required, minLength: minLength(3) },
@@ -76,8 +84,20 @@ const rules = computed(() => {
     maritalStatus: { required },
     idType: { required },
     idNumber: { required },
-    dateOfIssue: { required },
-    dateOfExpiry: { required },
+    dateOfIssue: {
+      required,
+      PastDate: helpers.withMessage(
+        "Issue date should be a past date",
+        PastDate
+      ),
+    },
+    dateOfExpiry: {
+      required,
+      FutureDate: helpers.withMessage(
+        "Expiry date should be a future date",
+        FutureDate
+      ),
+    },
     cbosId: { required },
     terms: { required },
   };
@@ -330,13 +350,16 @@ const quit = async () => {
               v-model="formData.dateOfIssue"
               placeholder="Date of Issue"
               :max="maxDateOfIssue"
+              type="date"
+              required
+              pattern="\d{1,2}/\d{1,2}/\d{4}"
               onfocus="(this.type='date')"
-              onblur="(this.type='text')"
+              onblur="(this.value == '' ? this.type='text' : this.type='date')"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <span
-              class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+              class="mt-2 mr-2 text-xs font-semibold text-red-600 dark:text-red-400"
               v-for="error of v$.dateOfIssue.$errors"
               :key="error.$uid"
             >
@@ -353,13 +376,14 @@ const quit = async () => {
               v-model="formData.dateOfExpiry"
               placeholder="Date of Expiry"
               :min="minDateOfExpiry"
+              type="date"
               onfocus="(this.type='date')"
-              onblur="(this.type='text')"
+              onblur="(this.value == '' ? this.type='text' : this.type='date')"
               id="base-input"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <span
-              class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+              class="mt-2 mr-2 text-xs font-semibold text-red-600 dark:text-red-400"
               v-for="error of v$.dateOfExpiry.$errors"
               :key="error.$uid"
             >

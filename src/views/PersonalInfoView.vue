@@ -12,6 +12,7 @@ import {
   required,
   email,
   minLength,
+  maxValue,
   sameAs,
   helpers,
 } from "@vuelidate/validators";
@@ -35,15 +36,16 @@ const router = useRouter();
 
 // maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
 
-let maxDobDate = moment().subtract(18, "years").format("YYYY-MM-DD");
-
 // maxDobDate = maxDobDate.getFullYear() + '-' + (maxDobDate.getMonth() + 1) + '-' + maxDobDate.getDate();
 onMounted(() => {
   formData.loadForm();
 });
 const formData = useUserData();
-
+let maxDobDate = moment().subtract(18, "years").format("YYYY-MM-DD");
 // console.log("Data: ", data.value);
+function isEighteen(value) {
+  return value && moment().diff(value, "years") >= 18;
+}
 const rules = computed(() => {
   return {
     firstName: { required, minLength: minLength(3) },
@@ -54,7 +56,14 @@ const rules = computed(() => {
     secondNameAr: { required, minLength: minLength(3) },
     thirdNameAr: { required, minLength: minLength(3) },
     fourthNameAr: { required, minLength: minLength(3) },
-    dob: { required },
+    dob: {
+      required,
+
+      isEighteen: helpers.withMessage(
+        "Age Should be 18 years old or above",
+        isEighteen
+      ),
+    },
     gender: { required },
 
     resident: { required },
@@ -316,7 +325,7 @@ const removeRow = () => {
                 :max="maxDobDate"
                 type="date"
                 onfocus="(this.type='date')"
-                onblur="(this.type='text')"
+                onblur="(this.value == '' ? this.type='text' : this.type='date')"
                 id="base-input"
                 class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
