@@ -101,6 +101,31 @@ const quit = async () => {
 // window.onbeforeunload = function () {
 //   return "Unsaved data will be lost if you leave the page, are you sure?";
 // };
+
+watch(
+  () => formData.iwr,
+  (iwr) => {
+    if (iwr !== "other") {
+      formData.iwrOther = "";
+    }
+  }
+);
+watch(
+  () => formData.bType,
+  (bType) => {
+    if (bType !== "other") {
+      formData.bTypeOther = "";
+    }
+  }
+);
+watch(
+  () => formData.bSector,
+  (bSector) => {
+    if (bSector !== "other") {
+      formData.bSectorOther = "";
+    }
+  }
+);
 </script>
 
 <template>

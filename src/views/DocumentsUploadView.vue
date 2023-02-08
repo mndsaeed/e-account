@@ -33,13 +33,16 @@ const personalPhotoUpload = async (event) => {
   formData.personalPhoto = event.target.files[0];
   const files = event.target.files;
   for (const file of files) {
-    if (
+    switch (
       await formData.upload(formData.personalPhoto, file.type, "personalPhoto")
     ) {
-      personalPhoto.value = event.target.files[0].name;
-      tryAgain.value = false;
-    } else {
-      tryAgain.value = true;
+      case true:
+        personalPhoto.value = event.target.files[0].name;
+        tryAgain.value = false;
+        break;
+      case false:
+        tryAgain.value = true;
+        break;
     }
     errorFormat.value = formData.fileFormat;
     errorSize.value = formData.fileToo;
@@ -53,11 +56,14 @@ const idPhotoUpload = async (event) => {
   formData.idPhoto = event.target.files[0];
   const files = event.target.files;
   for (const file of files) {
-    if (await formData.upload(formData.idPhoto, file.type, "idPhoto")) {
-      idPhoto.value = event.target.files[0].name;
-      tryAgain.value = false;
-    } else {
-      tryAgain.value = true;
+    switch (await formData.upload(formData.idPhoto, file.type, "idPhoto")) {
+      case true:
+        idPhoto.value = event.target.files[0].name;
+        tryAgain.value = false;
+        break;
+      case false:
+        tryAgain.value = true;
+        break;
     }
     errorFormat1.value = formData.fileFormat;
     errorSize1.value = formData.fileToo;
@@ -71,17 +77,21 @@ const selfieHoldingIdUpload = async (event) => {
   formData.selfieHoldingId = event.target.files[0];
   const files = event.target.files;
   for (const file of files) {
-    if (
+    switch (
       await formData.upload(
         formData.selfieHoldingId,
         file.type,
         "selfieHoldingId"
       )
     ) {
-      selfieHoldingId.value = event.target.files[0].name;
-      tryAgain.value = false;
-    } else {
-      tryAgain.value = true;
+      case true:
+        selfieHoldingId.value = event.target.files[0].name;
+        tryAgain.value = false;
+        break;
+      case false:
+        console.log("wtf");
+        tryAgain.value = true;
+        break;
     }
     errorFormat2.value = formData.fileFormat;
     errorSize2.value = formData.fileToo;

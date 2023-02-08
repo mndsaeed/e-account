@@ -132,6 +132,15 @@ const quit = async () => {
   formData.saveForm();
   router.push("/signin");
 };
+
+watch(
+  () => formData.maritalStatus,
+  (maritalStatus) => {
+    if (maritalStatus !== "other") {
+      formData.spouseName = "";
+    }
+  }
+);
 </script>
 
 <template>

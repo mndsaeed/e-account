@@ -210,6 +210,7 @@ export const useUserData = defineStore("UserData", {
             return true;
           }
         }
+
         if (description == "idPhoto") {
           if (documents.data.code == -600) {
             console.log("File too large");
