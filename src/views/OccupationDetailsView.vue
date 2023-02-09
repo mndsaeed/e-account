@@ -12,6 +12,7 @@ import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
+  requiredIf,
   email,
   minLength,
   sameAs,
@@ -61,9 +62,11 @@ const rules = computed(() => {
       numeric,
     },
     bType: { required },
+    bTypeOther: { requiredIf: requiredIf(formData.bType == "Other") },
     bSector: { required },
+    bSectorOther: { requiredIf: requiredIf(formData.bSector == "Other") },
     iwr: { required },
-
+    iwrOther: { requiredIf: requiredIf(formData.iwr == "Other") },
     salary: { required },
   };
 });
@@ -289,6 +292,13 @@ watch(
                   id="base-input"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.bTypeOther.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
               </div>
               <div
                 v-if="formData.bSector == 'Other'"
@@ -306,6 +316,13 @@ watch(
                   id="base-input"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
+                <span
+                  class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                  v-for="error of v$.bSectorOther.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}
+                </span>
               </div>
             </div>
             <div class="grid md:grid-cols-2 md:gap-20">
@@ -356,6 +373,13 @@ watch(
                 id="base-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
+              <span
+                class="mt-2 text-xs font-semibold text-red-600 dark:text-red-400"
+                v-for="error of v$.iwrOther.$errors"
+                :key="error.$uid"
+              >
+                {{ error.$message }}
+              </span>
             </div>
           </div>
         </div>
